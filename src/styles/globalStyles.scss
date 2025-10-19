@@ -1,0 +1,38 @@
+@import url("./reset.scss");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+  // --primary-dark: #239258; /* Cor primária da Nex Tecnologia */
+  --primary-action: #0d9488;
+  --primary-action-hover: #057a68;
+  --background-light: #f7f7f7;
+  --card-background: #ffffff;
+  --text-dark: #1f2937;
+  --text-light: #6b7280;
+  --border-color: #d1d5db;
+  --alert-bg: #fee2e2;
+  --alert-text: #991b1b;
+  --alert-border: #f87171;
+  --ok-bg: #d1fae5;
+  --ok-text: #065f46;
+  --ok-border: #34d399;
+
+  color-scheme: light dark;
+  color: rgba(0, 0, 0, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: #000000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 0;
+}
