@@ -9,7 +9,7 @@ type TemplatePageProps = {
 function TemplatePage({ children }: TemplatePageProps) {
 
   return (
-    <main className={styles.mainContainer}>
+    <main className={styles.templateContainer}>
         <Header />
         {children}
     </main>

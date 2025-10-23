@@ -2,7 +2,7 @@ import TemplatePage from '../template';
 import styles from './styles.module.scss';
 import { FaUser, FaLock } from 'react-icons/fa';
 
-function LoginPage() {
+const LoginPage = () => {
 
   return (
     <TemplatePage>
@@ -19,7 +19,7 @@ function LoginPage() {
           </div>
           <button type="submit">Entrar</button>
         </form>
-        <a href="#" rel="noopener noreferrer">
+        <a href="/forgot-password" rel="noopener noreferrer">
           Esqueceu a senha? Clique aqui.
         </a>
       </main>
