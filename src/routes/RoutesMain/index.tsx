@@ -1,7 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import LoginPage from "../../pages/login";
-import ForgotPassword from "../../pages/forgot-password";
-import Identification from "../../pages/identification";
+import {
+    LoginPage,
+    IdentificationByQrCode,
+    Identification,
+    ForgotPassword,
+    IdentificationByPlate,
+    VehicleDashboard,
+    Historical,
+} from "../../pages";
 
 const RoutesMain = () => {
 
@@ -11,6 +17,10 @@ const RoutesMain = () => {
             <Route path="/" element={<LoginPage />} />
             <Route path="/forgot-password" element={<ForgotPassword />} />
             <Route path="/identification" element={<Identification />} />
+            <Route path="/identification-by-qrcode" element={<IdentificationByQrCode />} />
+            <Route path="/identification-by-plate" element={<IdentificationByPlate />} />
+            <Route path="/vehicle-dashboard" element={<VehicleDashboard />} />
+            <Route path="/historical" element={<Historical />} />
 
         </Routes>
     );

@@ -1,0 +1,70 @@
+
+.historicalContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    gap: 1.875rem;
+
+    .contentServices {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem .625rem;
+        border-radius: .625rem;
+        border: .1563rem solid #CCCCCC;
+        gap: 1.875rem;
+
+        .serviceItem{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+
+            p {
+                text-align: left;
+            }
+
+        }
+
+    }
+
+    .buttonsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 400px;
+        gap: 1rem;
+        
+        .button {
+            font-size: 1.5625rem;
+            font-weight: 700;
+            background-color: #239258;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+    
+            &:hover {
+                background-color: #1e7e4c;
+            }
+            
+            svg {
+                width: 4rem;
+                height: 3rem;
+                stroke-width: 4;
+                stroke: currentColor;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+
+}
