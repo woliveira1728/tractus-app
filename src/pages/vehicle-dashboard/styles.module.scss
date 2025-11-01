@@ -1,9 +1,10 @@
 
 .vehicleDashboardContainer {
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 2rem;
     gap: 1.875rem;
 
@@ -13,7 +14,60 @@
         font-weight: 700;
     }
 
-    .buttonQrCode {
+    .eixosContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+        justify-content: center;
+
+        li {
+            width: 100%;;
+            list-style: none;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1rem;
+
+            .pLeft {
+                width: 20%;
+                font-size: 1.25rem;
+                font-weight: 700;
+                padding-bottom: 1.875rem;
+                text-align: right;
+
+                span {
+                    color: #FFFFFF;
+                    background-color: #239258;
+                    padding: .5rem;
+                    border-radius: 50%;
+                }
+            }
+
+            img {
+                width: 200px;
+                height: auto;
+            }
+
+            .pRight {
+                width: 20%;
+                font-size: 1.25rem;
+                font-weight: 700;
+                padding-bottom: 1.875rem;
+                text-align: left;
+
+                span {
+                    color: #FFFFFF;
+                    background-color: #239258;
+                    padding: .5rem;
+                    border-radius: 50%;
+                }
+            }
+        }
+    }
+
+    .button {
         margin-top: 1.875rem;
         width: 100%;
         padding: 0.75rem;
