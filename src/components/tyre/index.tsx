@@ -1,15 +1,16 @@
+import type { Pneu } from '../../types';
 import styles from './styles.module.scss';
 
-const Tyre = () => {
+const Tyre = ({ tyre } : { tyre: Pneu }) => {
   return (
     <section className={styles.tyreInfoSection}>
         <div className={styles.infoContainer}>
             <p>Número de fogo</p>
-            <span>234</span>
+            <span>{tyre.fogo}</span>
         </div>
         <div className={styles.infoContainer}>
             <p>Última pressão medida</p>
-            <span>220</span>
+            <span>{tyre.pressao}</span>
         </div>
         <div className={styles.infoContainer}>
             <p>Nova Pressão</p>

@@ -1,14 +1,47 @@
-import type { Pneu, HistoricoManutencao } from '../types';
+import type { Veiculo } from '../types';
 
-export const DADOS_PNEUS: Pneu[] = [
-  { id: 101, placa: 'AXZ-5032', fogo: 'FOGO101A', pressao: 85, sulco: 7.2, posicao: '1E', status: 'OK' },
-  { id: 102, placa: 'AXZ-5032', fogo: 'FOGO102B', pressao: 70, sulco: 3.5, posicao: '1D', status: 'CRÍTICO' },
-  { id: 103, placa: 'AXZ-5032', fogo: 'FOGO103C', pressao: 75, sulco: 6.1, posicao: '2EL', status: 'OK' },
-  { id: 104, placa: 'AXZ-5032', fogo: 'FOGO104D', pressao: 72, sulco: 5.8, posicao: '2ER', status: 'OK' },
-  { id: 105, placa: 'AXZ-5032', fogo: 'FOGO105E', pressao: 80, sulco: 6.0, posicao: '3EL', status: 'OK' },
-  { id: 106, placa: 'AXZ-5032', fogo: 'FOGO106F', pressao: 80, sulco: 5.9, posicao: '3EIL', status: 'OK' },
-  { id: 107, placa: 'AXZ-5032', fogo: 'FOGO107G', pressao: 82, sulco: 6.5, posicao: '3DIR', status: 'OK' },
-  { id: 108, placa: 'AXZ-5032', fogo: 'FOGO108H', pressao: 82, sulco: 6.4, posicao: '3DR', status: 'OK' },
+// Mock para usuários do sistema
+export const MOCK_USERS = [
+    {
+        id: '1',
+        name: 'José da Silva',
+        email: 'jose.silva@nex.com',
+        password: '123',
+    },
+    {
+        id: '2',
+        name: 'Maria Oliveira',
+        email: 'maria.oliveira@nex.com',
+        password: '456',
+    },
+];
+
+// Mock de dados dos veículos e seus pneus
+export const MOCK_VEHICLES: Veiculo[] = [
+    {
+        placa: 'ABC-1234',
+        modelo: 'Volvo VM (2 Eixos)',
+        eixos: 2,
+        pneus: [
+            { id: 101, placa: 'ABC-1234', fogo: 'FOGO101', pressao: 90, sulco: 8.0, posicao: 'L1', status: 'OK' },
+            { id: 102, placa: 'ABC-1234', fogo: 'FOGO102', pressao: 90, sulco: 8.0, posicao: 'R1', status: 'OK' },
+            { id: 103, placa: 'ABC-1234', fogo: 'FOGO103', pressao: 88, sulco: 7.5, posicao: 'L2', status: 'OK' },
+            { id: 104, placa: 'ABC-1234', fogo: 'FOGO104', pressao: 88, sulco: 7.5, posicao: 'R2', status: 'OK' },
+        ]
+    },
+    {
+        placa: 'DEF-5678',
+        modelo: 'MB Atego (3 Eixos)',
+        eixos: 3,
+        pneus: [
+            { id: 201, placa: 'DEF-5678', fogo: 'FOGO201', pressao: 85, sulco: 7.2, posicao: 'L1', status: 'OK' },
+            { id: 202, placa: 'DEF-5678', fogo: 'FOGO202', pressao: 70, sulco: 3.5, posicao: 'R1', status: 'CRÍTICO' },
+            { id: 203, placa: 'DEF-5678', fogo: 'FOGO203', pressao: 75, sulco: 6.1, posicao: 'L2', status: 'OK' },
+            { id: 204, placa: 'DEF-5678', fogo: 'FOGO204', pressao: 80, sulco: 4.8, posicao: 'R2', status: 'ALERTA' },
+            { id: 205, placa: 'DEF-5678', fogo: 'FOGO205', pressao: 82, sulco: 6.5, posicao: 'L3', status: 'OK' },
+            { id: 206, placa: 'DEF-5678', fogo: 'FOGO206', pressao: 82, sulco: 6.4, posicao: 'R3', status: 'OK' },
+        ]
+    }
 ];
 
 export const MOVIMENTACOES = [
@@ -17,9 +50,4 @@ export const MOVIMENTACOES = [
 
 export const DETALHES_RODIZIO = [
   'Troca de Posição', 'Substituído', 'Descartado'
-];
-
-export const MOCK_HISTORICO: HistoricoManutencao[] = [
-    { id: 1, pneuId: 101, posicao: '1E', pressaoAnterior: 85, sulcoAnterior: 8.0, pressaoNova: 85, sulcoNovo: 7.2, movimentacao: 'Sem Movimentação', data: '2024-10-01', usuario: 'Zé001' },
-    { id: 2, pneuId: 105, posicao: '3EL', pressaoAnterior: 82, sulcoAnterior: 7.5, pressaoNova: 80, sulcoNovo: 6.0, movimentacao: 'Rodízio', detalheRodizio: 'Troca de Posição', data: '2024-09-15', usuario: 'Zé001' },
 ];

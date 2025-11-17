@@ -1,0 +1,43 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+
+.container {
+    background: #fff;
+    border-radius: 8px;
+    max-height: 90vh;
+    overflow: auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid #eee;
+}
+
+.title {
+    color: #FFFFFF;
+    font-size: 20px;
+    font-weight: 700;
+    background-color: #239258;
+    padding: .5rem;
+    border-radius: 50%;
+}
+
+.closeBtn {
+    background: transparent;
+    color: #000000;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+}
