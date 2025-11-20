@@ -28,7 +28,7 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
     <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={title ?? 'Modal'}>
       <div className={styles.container}>
         <div className={styles.header}>
-          {title && <h3 className={styles.title}>{title}</h3>}
+          {title && <h3 className={title === 'Histórico' ? styles.titleHistorical  : styles.title}>{title}</h3>}
           <button aria-label="Fechar" className={styles.closeBtn} onClick={onClose}>
             ×
           </button>

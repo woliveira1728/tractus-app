@@ -6,12 +6,14 @@ import eixoWithoutConnection from '../../assets/eixo-final.png';
 import { useUser } from '../../providers/userContextValues';
 import Modal from '../../components/Modal';
 import { TyreDashboardContent } from '../../components/tyre-dashboard';
+import { HistoricalContent } from '../../components/historical';
 import type { Pneu } from '../../types';
 
 const VehicleDashboard = () => {
   const { vehicleSelected, pneusSelected } = useUser();
   const [openTyreModal, setOpenTyreModal] = React.useState(false);
   const [tyreSelected, setTyreSelected] = React.useState<Pneu | null>(null);
+  const [openHistoricalModal, setOpenHistoricalModal] = React.useState(false);
 
 
   const handleTyreSelect = (tyrePosition: string) => {
@@ -55,7 +57,7 @@ const VehicleDashboard = () => {
         }
 
         <div style={{ display: 'flex', gap: 8 }}>
-          <button className={styles.button}> Histórico do veículo </button>
+          <button className={styles.button} onClick={() => setOpenHistoricalModal(true)}> Histórico do veículo </button>
         </div>
 
         <Modal
@@ -63,7 +65,23 @@ const VehicleDashboard = () => {
           onClose={() => setOpenTyreModal(false)}
           title={tyreSelected?.posicao || ''}
         >
-          <TyreDashboardContent tyre={tyreSelected} onClose={() => setOpenTyreModal(false)} />
+          <TyreDashboardContent tyre={tyreSelected} />
+        </Modal>
+
+        <Modal
+          isOpen={openHistoricalModal}
+          onClose={() => setOpenHistoricalModal(false)}
+          title="Histórico"
+        >
+          {/* Pass list of tyres and initial index based on selected tyre (if any) */}
+          <HistoricalContent
+            tyres={pneusSelected ?? vehicleSelected?.pneus ?? []}
+            initialIndex={
+              tyreSelected && (pneusSelected ?? vehicleSelected?.pneus)
+                ? (pneusSelected ?? vehicleSelected?.pneus)!.findIndex((p) => p.posicao === tyreSelected.posicao)
+                : 0
+            }
+          />
         </Modal>
       </main>
     </TemplatePage>

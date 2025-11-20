@@ -7,7 +7,7 @@
         padding: 1.25rem .625rem;
         border-radius: .625rem;
         border: .1563rem solid #CCCCCC;
-        gap: 1.25rem;
+        gap: .625rem;
 
         .serviceTitle {
             font-size: 1.5rem;
@@ -51,6 +51,46 @@
             padding-inline: .625rem;
             padding-block: 1.25rem;
             border-radius: .625rem;
+
+            .descriptionItem {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                font-weight: 700;
+                gap: 1.25rem;
+
+                .selectContainer {
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    width: 100%;
+                    gap: .625rem;
+
+                    p {
+                        font-weight: 700;
+                        font-size: 20px;
+
+                        span {
+                            font-weight: 700;
+                        }
+                    }
+                    
+                    .select {
+                        padding: .5rem;
+                        border-radius: .3125rem;
+                        border: .125rem solid #CCCCCC;
+                        font-size: 12px;
+                        font-weight: 400;
+    
+                        &:focus {
+                            outline: none;
+                            border-color: #239258;
+                        }
+                    }
+                }
+            }
 
             p {
                 width: 100%;

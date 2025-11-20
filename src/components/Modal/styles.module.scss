@@ -9,6 +9,7 @@
 }
 
 .container {
+    width: 420px;
     background: #fff;
     border-radius: 8px;
     max-height: 90vh;
@@ -31,6 +32,12 @@
     background-color: #239258;
     padding: .5rem;
     border-radius: 50%;
+}
+
+.titleHistorical {
+    color: #000000;
+    font-size: 20px;
+    font-weight: 800;
 }
 
 .closeBtn {

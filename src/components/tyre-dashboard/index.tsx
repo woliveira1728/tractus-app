@@ -11,7 +11,7 @@ type TyreDashboardContentProps = {
   onClose?: () => void;
 };
 
-export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProps) => {
+export const TyreDashboardContent = ({ tyre }: TyreDashboardContentProps) => {
   const [ movement, setMovement ] = React.useState(false);
 
   const handleMovementChange = (e: ChangeEvent<HTMLSelectElement>) => {
@@ -22,29 +22,21 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
       setMovement(false);
     }
   };
-  console.log(tyre);
 
   return (
     <main className={styles.tyreDashboardContainer}>
-      {movement ? <Caster /> : (tyre ? <Tyre tyre={tyre} /> : null)}
+      {movement ? <Caster tyre={tyre!} /> : (tyre ? <Tyre tyre={tyre} /> : null)}
 
       <div className={styles.infoContainer}>
         <p>Movimentação</p>
-        <select name="movement" id="movement" defaultValue="recapagem" onChange={handleMovementChange}>
+        <select name="movement" id="movement" defaultValue="sem-movimentacao" onChange={handleMovementChange}>
           <option value="recapagem">Recapagem</option>
           <option value="rodizio">Rodízio</option>
           <option value="sem-movimentacao">Sem movimentação</option>
         </select>
       </div>
 
-      <div style={{ display: 'flex', gap: 8, marginTop: 16 }}>
-        <button className={styles.button}> Salvar e avançar </button>
-        {onClose && (
-          <button className={styles.button} onClick={onClose} style={{ background: '#aaa' }}>
-            Fechar
-          </button>
-        )}
-      </div>
+      <button className={styles.button}> Salvar e avançar </button>
     </main>
   );
 };

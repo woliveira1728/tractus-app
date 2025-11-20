@@ -14,11 +14,12 @@ export interface HistoricoManutencao {
 export type Pneu = {
     id: number;
     placa: string;
-    fogo: string;
+    fogo: number;
     pressao: number;
     sulco: number;
     posicao: string;
     status: string;
+    recapagens: number;
 };
 
 export type Veiculo = {

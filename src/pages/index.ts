@@ -5,7 +5,7 @@ import IdentificationByQrCode from "./identification-by-qrcode";
 import IdentificationByPlate from "./identification-by-plate";
 import VehicleDashboard from "./vehicle-dashboard";
 import TyreDashboard from "../components/tyre-dashboard";
-import Historical from "./historical";
+import Historical from "../components/historical";
 
 export {
     LoginPage,
