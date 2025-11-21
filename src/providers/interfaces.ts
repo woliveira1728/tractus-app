@@ -1,4 +1,4 @@
-import type { Pneu, Veiculo } from "../types";
+import type { Pneu, Veiculo, HistoricoManutencao } from "../types";
 
 
 export interface UserContextType {
@@ -11,6 +11,12 @@ export interface UserContextType {
     setVehicleSelected: (vehicle: Veiculo | null) => void;
     pneusSelected: Pneu[] | null;
     setPneusSelected: (pneus: Pneu[] | null) => void;
+
+    /* Tyre / history helpers */
+    findTyreById?: (pneuId: number) => { vehicleIndex: number; tyreIndex: number; tyre: Pneu } | null;
+    updateTyreMeasurements?: (pneuId: number, newPressao?: number, newSulco?: number, movimentacao?: string) => boolean;
+    getHistoryByPneuId?: (pneuId: number) => HistoricoManutencao[];
+    selectNextTyre?: (currentPosicao?: string, direction?: 'next' | 'prev') => Pneu | null;
 }
 
 export interface User {

@@ -25,6 +25,15 @@ const Caster = ({ tyre }: { tyre: Pneu }) => {
                     </div>
                 </div>
                 
+                <p>Enviado para recapagem?</p>
+                <div className={styles.radioContainer}>
+                    <input type="radio" id="yes" name="recapagem" value="yes" />
+                    <label htmlFor="yes">Sim</label>
+                    
+                    <input type="radio" id="no" name="recapagem" value="no" />
+                    <label htmlFor="no">Não</label>
+                </div>
+
                 <p>Subistituição de pneu?</p>
                 <div className={styles.radioContainer}>
                     <input type="radio" id="yes" name="substitution" value="yes" />

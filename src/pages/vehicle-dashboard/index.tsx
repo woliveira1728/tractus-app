@@ -65,7 +65,20 @@ const VehicleDashboard = () => {
           onClose={() => setOpenTyreModal(false)}
           title={tyreSelected?.posicao || ''}
         >
-          <TyreDashboardContent tyre={tyreSelected} />
+          <TyreDashboardContent
+            tyre={tyreSelected}
+            onClose={() => setOpenTyreModal(false)}
+            onAdvance={(next) => {
+              if (!next) {
+                // no next tyre -> close modal
+                setOpenTyreModal(false);
+                setTyreSelected(null);
+                return;
+              }
+              setTyreSelected(next);
+              // keep modal open so user can continue
+            }}
+          />
         </Modal>
 
         <Modal

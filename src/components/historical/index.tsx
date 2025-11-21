@@ -6,7 +6,7 @@ import TemplatePage from '../../pages/template';
 
 type Props = {
   tyres?: Pneu[];
-  positionLabel?: string; // fallback when tyres not provided
+  positionLabel?: string;
   initialIndex?: number;
 };
 
@@ -22,7 +22,6 @@ export const HistoricalContent: FC<Props> = ({ tyres, positionLabel = 'L1', init
   const next = () => setIndex((i) => (i + 1) % total);
 
   React.useEffect(() => {
-    // If the list changes or initialIndex changes, clamp the index
     if (!list) {
       setIndex(0);
       return;

@@ -3,16 +3,32 @@ import type { Pneu } from '../../types';
 import styles from './styles.module.scss';
 import { checkSulcoAndNotify } from '../../utils/sulco';
 
-const Tyre = ({ tyre, recapagens = 0 } : { tyre: Pneu; recapagens?: number }) => {
-    const [novaPressao, setNovaPressao] = useState<string>('');
-    const [novoSulco, setNovoSulco] = useState<string>('');
+type TyreProps = {
+  tyre: Pneu;
+  recapagens?: number;
+  novaPressao?: string;
+  setNovaPressao?: (v: string) => void;
+  novoSulco?: string;
+  setNovoSulco?: (v: string) => void;
+};
+
+const Tyre = ({ tyre, recapagens = 0, novaPressao: propPressao, setNovaPressao: setPropPressao, novoSulco: propSulco, setNovoSulco: setPropSulco }: TyreProps) => {
+    const [localPressao, setLocalPressao] = useState<string>('');
+    const [localSulco, setLocalSulco] = useState<string>('');
+
+    const novaPressao = propPressao ?? localPressao;
+    const setNovaPressao = setPropPressao ?? setLocalPressao;
+
+    const novoSulco = propSulco ?? localSulco;
+    const setNovoSulco = setPropSulco ?? setLocalSulco;
 
     const handleSulcoBlur = () => {
-        const raw = novoSulco.replace(',', '.');
+        const raw = (novoSulco ?? '').toString().replace(',', '.');
         const value = parseFloat(raw);
         if (Number.isNaN(value)) return;
         checkSulcoAndNotify(value, recapagens);
     };
+
 
     return (
         <section className={styles.tyreInfoSection}>
@@ -26,7 +42,7 @@ const Tyre = ({ tyre, recapagens = 0 } : { tyre: Pneu; recapagens?: number }) =>
             </div>
             <div className={styles.infoContainer}>
                 <p>Nova Pressão</p>
-                <input type="number" placeholder='190' value={novaPressao} onChange={(e) => setNovaPressao(e.target.value)} />
+                <input type="number" placeholder='80' value={novaPressao} onChange={(e) => setNovaPressao(e.target.value)} />
             </div>
             <div className={styles.infoContainer}>
                 <p>Profundidade do Sulco</p>

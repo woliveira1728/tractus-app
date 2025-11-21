@@ -14,7 +14,7 @@ export interface HistoricoManutencao {
 export type Pneu = {
     id: number;
     placa: string;
-    fogo: number;
+    fogo: string;
     pressao: number;
     sulco: number;
     posicao: string;
