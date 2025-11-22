@@ -4,6 +4,7 @@ import styles from './styles.module.scss';
 import eixoWithConnection from '../../assets/eixo-conexao.png';
 import eixoWithoutConnection from '../../assets/eixo-final.png';
 import { useUser } from '../../providers/userContextValues';
+import { toast } from 'react-toastify';
 import Modal from '../../components/Modal';
 import { TyreDashboardContent } from '../../components/tyre-dashboard';
 import { HistoricalContent } from '../../components/historical';
@@ -57,26 +58,34 @@ const VehicleDashboard = () => {
         }
 
         <div style={{ display: 'flex', gap: 8 }}>
-          <button className={styles.button} onClick={() => setOpenHistoricalModal(true)}> Histórico do veículo </button>
+          <button className={styles.button} onClick={() => setOpenHistoricalModal(true)}>
+            Histórico
+          </button>
+
+          <button
+            className={styles.button}
+            onClick={() => {
+              const placa = vehicleSelected?.placa ?? 'N/D';
+              toast.info(`Relatório do veículo ${placa} enviado com sucesso.`);
+            }}
+          >
+            Enviar relatório
+          </button>
         </div>
 
         <Modal
           isOpen={openTyreModal}
-          onClose={() => setOpenTyreModal(false)}
+          onClose={() => {
+            setOpenTyreModal(false);
+            setTyreSelected(null);
+          }}
           title={tyreSelected?.posicao || ''}
         >
           <TyreDashboardContent
             tyre={tyreSelected}
-            onClose={() => setOpenTyreModal(false)}
-            onAdvance={(next) => {
-              if (!next) {
-                // no next tyre -> close modal
-                setOpenTyreModal(false);
-                setTyreSelected(null);
-                return;
-              }
-              setTyreSelected(next);
-              // keep modal open so user can continue
+            onClose={() => {
+              setOpenTyreModal(false);
+              setTyreSelected(null);
             }}
           />
         </Modal>

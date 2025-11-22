@@ -2,6 +2,7 @@ import React from 'react';
 import Caster from '../caster';
 import Tyre from '../tyre';
 import { useUser } from '../../providers/userContextValues';
+import ReplacementTyreModal from '../replacement-tyre';
 import TemplatePage from '../../pages/template';
 import styles from './styles.module.scss';
 import type { ChangeEvent } from 'react';
@@ -10,34 +11,36 @@ import type { Pneu } from '../../types';
 type TyreDashboardContentProps = {
   tyre?: Pneu | null;
   onClose?: () => void;
-  onAdvance?: (next: Pneu | null) => void;
 };
 
-export const TyreDashboardContent = ({ tyre, onAdvance, onClose }: TyreDashboardContentProps) => {
+export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProps) => {
   const [ movement, setMovement ] = React.useState(false);
   const [novaPressao, setNovaPressao] = React.useState<string>('');
   const [novoSulco, setNovoSulco] = React.useState<string>('');
 
-  const { updateTyreMeasurements, selectNextTyre } = useUser();
+  const { updateTyreMeasurements, findTyreById } = useUser();
 
   const handleMovementChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
-    if (value === 'rodizio/recapagem') {
+    if (value === 'substituicao') {
       setMovement(true);
     } else {
       setMovement(false);
     }
   };
 
+  const [substitutionRequested, setSubstitutionRequested] = React.useState(false);
+  const [replacementOpen, setReplacementOpen] = React.useState(false);
+
   return (
     <main className={styles.tyreDashboardContainer}>
-      {movement ? <Caster tyre={tyre!} /> : (tyre ? <Tyre tyre={tyre} novaPressao={novaPressao} setNovaPressao={setNovaPressao} novoSulco={novoSulco} setNovoSulco={setNovoSulco} recapagens={tyre?.recapagens ?? 0} /> : null)}
+      {movement ? <Caster tyre={tyre!} onSubstitutionChange={(v) => setSubstitutionRequested(v)} /> : (tyre ? <Tyre tyre={tyre} novaPressao={novaPressao} setNovaPressao={setNovaPressao} novoSulco={novoSulco} setNovoSulco={setNovoSulco} recapagens={tyre?.recapagens ?? 0} /> : null)}
 
       <div className={styles.infoContainer}>
         <p>Movimentação</p>
         <select name="movement" id="movement" defaultValue="sem-movimentacao" onChange={handleMovementChange}>
           <option value="sem-movimentacao">Sem movimentação</option>
-          <option value="rodizio/recapagem">Rodízio/Recapagem</option>
+          <option value="substituicao">Substituição</option>
         </select>
       </div>
 
@@ -49,20 +52,54 @@ export const TyreDashboardContent = ({ tyre, onAdvance, onClose }: TyreDashboard
           const sulcoVal = rawSulco ? parseFloat(rawSulco) : undefined;
           const pressVal = novaPressao ? parseFloat(novaPressao) : undefined;
 
-          const saved = updateTyreMeasurements ? updateTyreMeasurements(tyre.id, pressVal, sulcoVal, 'Sem Movimentação') : false;
+          // if substitutionRequested we suppress the immediate toast; the replacement modal will trigger confirmation
+          const saved = updateTyreMeasurements ? updateTyreMeasurements(tyre.id, pressVal, sulcoVal, 'Sem Movimentação', substitutionRequested) : false;
 
-          // advance selection only when saved
+          // when saved:
           if (saved) {
-            const next = selectNextTyre ? selectNextTyre(tyre.posicao, 'next') : null;
-            if (onAdvance) onAdvance(next);
-            // reset inputs for next tyre
+            if (substitutionRequested) {
+              // open replacement modal so user can provide new tyre data
+              setReplacementOpen(true);
+              return;
+            }
+
+            // For 'Sem movimentação' we close all modals and return to tyre dashboard
             setNovaPressao('');
             setNovoSulco('');
-            // optionally close modal if there is no next
-            if (!next && onClose) onClose();
+            if (onClose) onClose();
           }
         }}
       > Salvar e avançar </button>
+
+      <ReplacementTyreModal
+        isOpen={replacementOpen}
+        onClose={() => setReplacementOpen(false)}
+        onSave={(newTyre) => {
+          if (!tyre) {
+            setReplacementOpen(false);
+            return;
+          }
+
+          const found = findTyreById ? findTyreById(tyre.id) : null;
+          if (found) {
+            const t = found.tyre;
+            if (newTyre.fogo) t.fogo = newTyre.fogo as string;
+            if (newTyre.pressao !== undefined) t.pressao = newTyre.pressao as number;
+            if (newTyre.sulco !== undefined) t.sulco = newTyre.sulco as number;
+            t.recapagens = 0;
+
+            if (updateTyreMeasurements) {
+              updateTyreMeasurements(t.id, t.pressao, t.sulco, 'Substituição - novo pneu');
+            }
+          }
+
+          setReplacementOpen(false);
+          setSubstitutionRequested(false);
+
+          // After replacement is saved, close all modals and return to tyre dashboard
+          if (onClose) onClose();
+        }}
+      />
     </main>
   );
 };

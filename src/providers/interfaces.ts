@@ -14,7 +14,7 @@ export interface UserContextType {
 
     /* Tyre / history helpers */
     findTyreById?: (pneuId: number) => { vehicleIndex: number; tyreIndex: number; tyre: Pneu } | null;
-    updateTyreMeasurements?: (pneuId: number, newPressao?: number, newSulco?: number, movimentacao?: string) => boolean;
+    updateTyreMeasurements?: (pneuId: number, newPressao?: number, newSulco?: number, movimentacao?: string, suppressToast?: boolean) => boolean;
     getHistoryByPneuId?: (pneuId: number) => HistoricoManutencao[];
     selectNextTyre?: (currentPosicao?: string, direction?: 'next' | 'prev') => Pneu | null;
 }

@@ -36,6 +36,7 @@
                 font-weight: 700;
                 padding-bottom: 1.875rem;
                 text-align: right;
+                cursor: pointer;
 
                 span {
                     color: #FFFFFF;
@@ -56,12 +57,14 @@
                 font-weight: 700;
                 padding-bottom: 1.875rem;
                 text-align: left;
+                cursor: pointer;
 
                 span {
                     color: #FFFFFF;
                     background-color: #239258;
                     padding: .5rem;
                     border-radius: 50%;
+
                 }
             }
         }
@@ -70,8 +73,8 @@
     .button {
         margin-top: 1.875rem;
         width: 100%;
-        padding: 0.75rem;
-        font-size: 1.5625rem;
+        padding: 5px;
+        font-size: 20px;
         font-weight: 700;
         background-color: #239258;
         color: #000000;

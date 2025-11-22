@@ -54,7 +54,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
   let nextHistoricoId = MOCK_HISTORICO.length ? Math.max(...MOCK_HISTORICO.map(h => h.id)) + 1 : 1;
 
-  const updateTyreMeasurements = (pneuId: number, newPressao?: number, newSulco?: number, movimentacao = 'Sem Movimentação') => {
+  const updateTyreMeasurements = (pneuId: number, newPressao?: number, newSulco?: number, movimentacao = 'Sem Movimentação', suppressToast = false) => {
     const found = findTyreById(pneuId);
     if (!found) {
       toast.error('Pneu não encontrado.');
@@ -86,7 +86,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     };
 
     MOCK_HISTORICO.push(historico);
-    toast.success('Medições salvas com sucesso.');
+    if (!suppressToast) {
+      toast.success('Medições salvas com sucesso.');
+    }
     return true;
   };
 

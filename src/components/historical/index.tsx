@@ -51,8 +51,7 @@ export const HistoricalContent: FC<Props> = ({ tyres, positionLabel = 'L1', init
           <p>Pressão: <span>{current?.pressao ?? '—'}</span></p>
           <p>Movimentações realizadas:</p>
           <ul>
-            <li>Recapagem</li>
-            <li>Rodízio</li>
+            <li>Recapagens: <span>{current?.recapagens ?? '—'}</span></li>
           </ul>
         </div>
       </div>

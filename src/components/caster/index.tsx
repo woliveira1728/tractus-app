@@ -2,7 +2,7 @@ import styles from './styles.module.scss';
 import { useUser } from '../../providers/userContextValues';
 import type { Pneu } from '../../types';
 
-const Caster = ({ tyre }: { tyre: Pneu }) => {
+const Caster = ({ tyre, onSubstitutionChange }: { tyre: Pneu; onSubstitutionChange?: (v: boolean) => void }) => {
     const { vehicleSelected } = useUser();
     const tyresPositions = vehicleSelected ? vehicleSelected.pneus.map(p => p.posicao) : [];
 
@@ -10,11 +10,11 @@ const Caster = ({ tyre }: { tyre: Pneu }) => {
     return (
         <div className={styles.contentServices}>
             <div className={styles.serviceItem}>
-                <p>Rodízio</p>
+                <p>Substituição</p>
             </div>
             <div className={styles.descriptionContainer}>
                 <div className={styles.descriptionItem}>
-                    <p>Alteração de posição:</p>
+                    <p>Alteração de posição (Rodízio):</p>
                     <div className={styles.selectContainer}>
                         <p>De <span>{tyre.posicao}</span> para</p>
                         <select className={styles.select} defaultValue={tyre.posicao} >
@@ -36,10 +36,10 @@ const Caster = ({ tyre }: { tyre: Pneu }) => {
 
                 <p>Subistituição de pneu?</p>
                 <div className={styles.radioContainer}>
-                    <input type="radio" id="yes" name="substitution" value="yes" />
+                    <input type="radio" id="yes" name="substitution" value="yes" onChange={() => onSubstitutionChange?.(true)} />
                     <label htmlFor="yes">Sim</label>
                     
-                    <input type="radio" id="no" name="substitution" value="no" />
+                    <input type="radio" id="no" name="substitution" value="no" defaultChecked onChange={() => onSubstitutionChange?.(false)} />
                     <label htmlFor="no">Não</label>
                 </div>
                 
