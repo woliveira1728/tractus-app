@@ -11,7 +11,7 @@ import { HistoricalContent } from '../../components/historical';
 import type { Pneu } from '../../types';
 
 const VehicleDashboard = () => {
-  const { vehicleSelected, pneusSelected } = useUser();
+  const { vehicleSelected, pneusSelected, navigate } = useUser();
   const [openTyreModal, setOpenTyreModal] = React.useState(false);
   const [tyreSelected, setTyreSelected] = React.useState<Pneu | null>(null);
   const [openHistoricalModal, setOpenHistoricalModal] = React.useState(false);
@@ -67,6 +67,9 @@ const VehicleDashboard = () => {
             onClick={() => {
               const placa = vehicleSelected?.placa ?? 'N/D';
               toast.info(`Relatório do veículo ${placa} enviado com sucesso.`);
+              // After sending report, navigate back to identification
+              // navigate back to identification
+              navigate('/identification');
             }}
           >
             Enviar relatório
