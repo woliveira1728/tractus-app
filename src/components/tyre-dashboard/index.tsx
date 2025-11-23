@@ -18,7 +18,7 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
   const [novaPressao, setNovaPressao] = React.useState<string>('');
   const [novoSulco, setNovoSulco] = React.useState<string>('');
 
-  const { updateTyreMeasurements, findTyreById, replaceTyre } = useUser();
+  const { updateTyreMeasurements, replaceTyre } = useUser();
 
   const handleMovementChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
