@@ -52,6 +52,7 @@ const ReplacementTyreModal = ({ isOpen, onClose, onSave }: ReplacementTyreProps)
                     fogo: fogo || undefined,
                     pressao: pressao ? parseFloat(pressao) : undefined,
                     sulco: sulco ? parseFloat(sulco) : undefined,
+                    recapagens: recapagens ? parseInt(recapagens, 10) : undefined,
                     };
                     onSave(newTyre);
                 }}>Salvar pneu</button>

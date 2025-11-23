@@ -18,7 +18,7 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
   const [novaPressao, setNovaPressao] = React.useState<string>('');
   const [novoSulco, setNovoSulco] = React.useState<string>('');
 
-  const { updateTyreMeasurements, findTyreById } = useUser();
+  const { updateTyreMeasurements, findTyreById, replaceTyre } = useUser();
 
   const handleMovementChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const value = e.target.value;
@@ -79,18 +79,9 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
             setReplacementOpen(false);
             return;
           }
-
-          const found = findTyreById ? findTyreById(tyre.id) : null;
-          if (found) {
-            const t = found.tyre;
-            if (newTyre.fogo) t.fogo = newTyre.fogo as string;
-            if (newTyre.pressao !== undefined) t.pressao = newTyre.pressao as number;
-            if (newTyre.sulco !== undefined) t.sulco = newTyre.sulco as number;
-            t.recapagens = 0;
-
-            if (updateTyreMeasurements) {
-              updateTyreMeasurements(t.id, t.pressao, t.sulco, 'Substituição - novo pneu');
-            }
+          // Use provider centralized replaceTyre to perform substitution and historico
+          if (replaceTyre) {
+            replaceTyre(tyre.id, newTyre, 'Substituição - novo pneu');
           }
 
           setReplacementOpen(false);

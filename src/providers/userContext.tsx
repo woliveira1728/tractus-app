@@ -92,6 +92,46 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     return true;
   };
 
+  const replaceTyre = (originalPneuId: number, newTyreData: Partial<Pneu>, movimentacao = 'Substituição') => {
+    const found = findTyreById(originalPneuId);
+    if (!found) {
+      toast.error('Pneu original não encontrado para substituição.');
+      return false;
+    }
+
+    const { vehicleIndex, tyreIndex } = found;
+    const veh = MOCK_VEHICLES[vehicleIndex];
+    const tyre = veh.pneus[tyreIndex];
+
+    const prevPressao = tyre.pressao;
+    const prevSulco = tyre.sulco;
+
+    // apply new data
+    if (newTyreData.fogo !== undefined) tyre.fogo = newTyreData.fogo as string;
+    if (newTyreData.pressao !== undefined && !Number.isNaN(newTyreData.pressao)) tyre.pressao = newTyreData.pressao as number;
+    if (newTyreData.sulco !== undefined && !Number.isNaN(newTyreData.sulco)) tyre.sulco = newTyreData.sulco as number;
+    if (newTyreData.recapagens !== undefined) tyre.recapagens = newTyreData.recapagens as number;
+    else tyre.recapagens = 0;
+
+    const historico: HistoricoManutencao = {
+      id: nextHistoricoId++,
+      pneuId: tyre.id,
+      posicao: tyre.posicao,
+      pressaoAnterior: prevPressao,
+      sulcoAnterior: prevSulco,
+      pressaoNova: tyre.pressao,
+      sulcoNovo: tyre.sulco,
+      movimentacao,
+      detalheRodizio: undefined,
+      data: new Date().toISOString(),
+      usuario: user ? user.name : 'Sistema'
+    };
+
+    MOCK_HISTORICO.push(historico);
+    toast.success('Substituição realizada e medições salvas com sucesso.');
+    return true;
+  };
+
   const getHistoryByPneuId = (pneuId: number): HistoricoManutencao[] => {
     return MOCK_HISTORICO.filter(h => h.pneuId === pneuId);
   };
@@ -124,6 +164,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
             updateTyreMeasurements,
             getHistoryByPneuId,
             selectNextTyre,
+                replaceTyre,
         }}
     >
       {children}
