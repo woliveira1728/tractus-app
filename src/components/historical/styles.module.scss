@@ -1,0 +1,138 @@
+
+.historicalContainer {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    gap: 1.875rem;
+
+    .contentServices {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem .625rem;
+        border-radius: .625rem;
+        border: .1563rem solid #CCCCCC;
+        gap: 1.25rem;
+
+        .serviceTitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-align: left;
+            width: 100%;
+            padding-bottom: .9375rem;
+            border-bottom: .1563rem solid #CCCCCC;
+
+            span {
+                color: #FFFFFF;
+                background-color: #239258;
+                padding: .25rem .5rem;
+                border-radius: 50%;
+            }
+        }
+
+        .serviceItem{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: 700;
+            width: 100%;
+
+            p {
+                text-align: left;
+            }
+
+        }
+
+        .descriptionContainer {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            gap: 1.25rem;
+            border: .1563rem solid #CCCCCC;
+            padding-inline: .625rem;
+            padding-block: 1.25rem;
+            border-radius: .625rem;
+
+            .descriptionDate{
+                width: 100%;
+                font-weight: 700;
+                display: flex;
+                flex-direction: row;
+                justify-content: flex-end;
+            }
+
+            p {
+                width: 100%;
+                font-weight: 700;
+
+                span {
+                    font-weight: 400;
+                }
+            }
+
+            ul {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                gap: .625rem;
+
+                li {
+                    background-color: #CCCCCC;
+                    padding: .3125rem 20px;
+                    border-radius: .3125rem;
+                    font-weight: 700;
+
+                    span {
+                        color: #239258;
+                    }
+                }
+            }
+        }
+
+    }
+
+    .buttonsContainer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 400px;
+        gap: 1rem;
+        
+        .button {
+            font-size: 1.5625rem;
+            font-weight: 700;
+            background-color: #239258;
+            color: #000000;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            padding: 1rem .5rem;
+    
+            &:hover {
+                background-color: #1e7e4c;
+            }
+            
+            svg {
+                width: 4rem;
+                height: 3rem;
+                stroke-width: 4;
+                stroke: currentColor;
+                display: inline-block;
+                vertical-align: middle;
+            }
+        }
+    }
+
+}
