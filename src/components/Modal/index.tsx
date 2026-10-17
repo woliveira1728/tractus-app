@@ -6,10 +6,11 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  hideHeader?: boolean;
   children: React.ReactNode;
 };
 
-const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, hideHeader = false, children }: ModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -27,16 +28,18 @@ const Modal = ({ isOpen, onClose, title, children }: ModalProps) => {
   return ReactDOM.createPortal(
     <div className={styles.overlay} role="dialog" aria-modal="true" aria-label={title ?? 'Modal'}>
       <div className={styles.container}>
-        <div className={styles.header}>
-          {title && <h3 className={title === 'Histórico' ? styles.titleHistorical  : title === 'Dados do novo pneu' ? styles.titleReplacement : styles.title}>{title}</h3>}
-          <button aria-label="Fechar" className={styles.closeBtn} onClick={onClose}>
-            ×
-          </button>
-        </div>
+        {!hideHeader && (
+          <div className={styles.header}>
+            {title ? <h3 className={styles.title}>{title}</h3> : <span />}
+            <button aria-label="Fechar" className={styles.closeBtn} onClick={onClose}>
+              ×
+            </button>
+          </div>
+        )}
         <div className={styles.body}>{children}</div>
       </div>
     </div>,
-    document.body,
+    document.body
   );
 };
 

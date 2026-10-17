@@ -1,54 +1,235 @@
-import type { Veiculo } from '../types';
+import type { Veiculo, HistoricoManutencao, OrdemServico } from '../types';
+import type { User } from '../providers/interfaces';
 
-// Mock para usuários do sistema
-export const MOCK_USERS = [
-    {
-        id: '1',
-        name: 'José da Silva',
-        email: 'jose.silva@nex.com',
-        password: '123',
-    },
-    {
-        id: '2',
-        name: 'Maria Oliveira',
-        email: 'maria.oliveira@nex.com',
-        password: '456',
-    },
+// Personas detalhadas (Seção 2.1 da AP2) + contas compatíveis
+export const MOCK_USERS: User[] = [
+  {
+    id: '1',
+    name: 'José (Zé) Rodrigues',
+    email: 'ze@transcargabrasil.com.br',
+    password: '123',
+    role: 'borracheiro',
+  },
+  {
+    id: '2',
+    name: 'Antônio Carlos (Seu Carlos)',
+    email: 'carlos@transcargabrasil.com.br',
+    password: '123',
+    role: 'gerente',
+  },
+  {
+    id: '3',
+    name: 'José da Silva',
+    email: 'jose.silva@nex.com',
+    password: '123',
+    role: 'borracheiro',
+  },
+  {
+    id: '4',
+    name: 'Maria Oliveira',
+    email: 'maria.oliveira@nex.com',
+    password: '456',
+    role: 'gerente',
+  },
 ];
 
+// Frota da TransCargaBrasil (Unidade Canoas/RS) alinhada ao Protótipo de Alta Fidelidade
 export const MOCK_VEHICLES: Veiculo[] = [
-    {
-        placa: 'ABC-1234',
-        modelo: 'Volvo VM (2 Eixos)',
-        eixos: 2,
-        pneus: [
-            { id: 101, placa: 'ABC-1234', fogo: 'FOGO101', pressao: 90, sulco: 8.0, posicao: 'L1', status: 'OK', recapagens: 0 },
-            { id: 102, placa: 'ABC-1234', fogo: 'FOGO102', pressao: 90, sulco: 8.0, posicao: 'R1', status: 'OK', recapagens: 0 },
-            { id: 103, placa: 'ABC-1234', fogo: 'FOGO103', pressao: 88, sulco: 7.5, posicao: 'L2', status: 'OK', recapagens: 0 },
-            { id: 104, placa: 'ABC-1234', fogo: 'FOGO104', pressao: 88, sulco: 7.5, posicao: 'R2', status: 'OK', recapagens: 0 },
-        ]
+  {
+    placa: 'EJDH45',
+    modelo: 'Caminhão Volvo FH 540',
+    eixos: 3,
+    pneus: [
+      { id: 1, placa: 'EJDH45', fogo: '190', pressao: 110, ultimaPressao: 120, sulco: 5.0, posicao: 'L1', status: 'OK', recapagens: 0 },
+      { id: 2, placa: 'EJDH45', fogo: '190', pressao: 110, ultimaPressao: 120, sulco: 5.0, posicao: 'R1', status: 'OK', recapagens: 0 },
+      { id: 3, placa: 'EJDH45', fogo: '221', pressao: 110, ultimaPressao: 120, sulco: 3.2, posicao: 'L2', status: 'ALERTA', recapagens: 1 },
+      { id: 4, placa: 'EJDH45', fogo: '190', pressao: 110, ultimaPressao: 120, sulco: 5.0, posicao: 'R2', status: 'OK', recapagens: 0 },
+      { id: 5, placa: 'EJDH45', fogo: '205', pressao: 115, ultimaPressao: 120, sulco: 6.5, posicao: 'L3', status: 'OK', recapagens: 1 },
+      { id: 6, placa: 'EJDH45', fogo: '208', pressao: 115, ultimaPressao: 120, sulco: 6.2, posicao: 'R3', status: 'OK', recapagens: 1 },
+    ],
+  },
+  {
+    placa: 'ABC-1234',
+    modelo: 'Volvo VM (3 Eixos)',
+    eixos: 3,
+    pneus: [
+      { id: 101, placa: 'ABC-1234', fogo: '190', pressao: 110, ultimaPressao: 120, sulco: 8.0, posicao: 'L1', status: 'OK', recapagens: 0 },
+      { id: 102, placa: 'ABC-1234', fogo: '190', pressao: 110, ultimaPressao: 120, sulco: 5.0, posicao: 'R1', status: 'OK', recapagens: 0 },
+      { id: 103, placa: 'ABC-1234', fogo: '192', pressao: 108, ultimaPressao: 115, sulco: 7.5, posicao: 'L2', status: 'OK', recapagens: 0 },
+      { id: 104, placa: 'ABC-1234', fogo: '190', pressao: 110, ultimaPressao: 120, sulco: 5.0, posicao: 'R2', status: 'OK', recapagens: 0 },
+      { id: 105, placa: 'ABC-1234', fogo: '195', pressao: 110, ultimaPressao: 118, sulco: 6.8, posicao: 'L3', status: 'OK', recapagens: 1 },
+      { id: 106, placa: 'ABC-1234', fogo: '196', pressao: 110, ultimaPressao: 118, sulco: 6.8, posicao: 'R3', status: 'OK', recapagens: 1 },
+    ],
+  },
+  {
+    placa: 'DEF-5678',
+    modelo: 'MB Atego (3 Eixos)',
+    eixos: 3,
+    pneus: [
+      { id: 201, placa: 'DEF-5678', fogo: '201', pressao: 110, ultimaPressao: 120, sulco: 7.2, posicao: 'L1', status: 'OK', recapagens: 1 },
+      { id: 202, placa: 'DEF-5678', fogo: '202', pressao: 95, ultimaPressao: 115, sulco: 1.5, posicao: 'R1', status: 'CRÍTICO', recapagens: 3 },
+      { id: 203, placa: 'DEF-5678', fogo: '203', pressao: 105, ultimaPressao: 115, sulco: 6.1, posicao: 'L2', status: 'OK', recapagens: 2 },
+      { id: 204, placa: 'DEF-5678', fogo: '204', pressao: 100, ultimaPressao: 115, sulco: 3.4, posicao: 'R2', status: 'ALERTA', recapagens: 2 },
+      { id: 205, placa: 'DEF-5678', fogo: '205', pressao: 110, ultimaPressao: 120, sulco: 6.5, posicao: 'L3', status: 'OK', recapagens: 0 },
+      { id: 206, placa: 'DEF-5678', fogo: '206', pressao: 110, ultimaPressao: 120, sulco: 6.4, posicao: 'R3', status: 'OK', recapagens: 0 },
+    ],
+  },
+  {
+    placa: 'FGH5678',
+    modelo: 'Carreta Randon (3 Eixos)',
+    eixos: 3,
+    pneus: [
+      { id: 301, placa: 'FGH5678', fogo: '310', pressao: 115, ultimaPressao: 120, sulco: 5.5, posicao: 'L1', status: 'OK', recapagens: 1 },
+      { id: 302, placa: 'FGH5678', fogo: '311', pressao: 115, ultimaPressao: 120, sulco: 5.5, posicao: 'R1', status: 'OK', recapagens: 1 },
+      { id: 303, placa: 'FGH5678', fogo: '312', pressao: 110, ultimaPressao: 120, sulco: 2.8, posicao: 'L2', status: 'ALERTA', recapagens: 2 },
+      { id: 304, placa: 'FGH5678', fogo: '313', pressao: 110, ultimaPressao: 120, sulco: 5.0, posicao: 'R2', status: 'OK', recapagens: 1 },
+      { id: 305, placa: 'FGH5678', fogo: '314', pressao: 112, ultimaPressao: 120, sulco: 6.0, posicao: 'L3', status: 'OK', recapagens: 0 },
+      { id: 306, placa: 'FGH5678', fogo: '315', pressao: 112, ultimaPressao: 120, sulco: 6.0, posicao: 'R3', status: 'OK', recapagens: 0 },
+    ],
+  },
+  {
+    placa: 'JKL9V01',
+    modelo: 'Caminhão Scania R450',
+    eixos: 3,
+    pneus: [
+      { id: 401, placa: 'JKL9V01', fogo: '401', pressao: 120, ultimaPressao: 122, sulco: 7.5, posicao: 'L1', status: 'OK', recapagens: 0 },
+      { id: 402, placa: 'JKL9V01', fogo: '402', pressao: 120, ultimaPressao: 122, sulco: 7.5, posicao: 'R1', status: 'OK', recapagens: 0 },
+      { id: 403, placa: 'JKL9V01', fogo: '403', pressao: 115, ultimaPressao: 120, sulco: 3.1, posicao: 'L2', status: 'ALERTA', recapagens: 1 },
+      { id: 404, placa: 'JKL9V01', fogo: '404', pressao: 115, ultimaPressao: 120, sulco: 6.0, posicao: 'R2', status: 'OK', recapagens: 1 },
+      { id: 405, placa: 'JKL9V01', fogo: '405', pressao: 118, ultimaPressao: 120, sulco: 6.8, posicao: 'L3', status: 'OK', recapagens: 0 },
+      { id: 406, placa: 'JKL9V01', fogo: '406', pressao: 118, ultimaPressao: 120, sulco: 6.8, posicao: 'R3', status: 'OK', recapagens: 0 },
+    ],
+  },
+];
+
+// Ordens de Serviço pré-cadastradas conforme Imagens 4.8 e 4.10 do Protótipo de Alta Fidelidade
+export const MOCK_SERVICE_ORDERS: OrdemServico[] = [
+  {
+    id: 10245,
+    placa: 'EJDH45',
+    veiculo: 'Caminhão Volvo FH 540',
+    dataHora: '12/10/2025 - 08:00',
+    timestampIso: '2025-10-12T08:00:00.000Z',
+    tipoServico: 'Recapagem',
+    pneusEnvolvidos: 'L1, L2',
+    profundidadeSulco: 11,
+    novaPressao: 110,
+    ultimaPressaoMedida: 120,
+    numeroFogo: '221',
+    movimentacoesRealizadas: {
+      rodizio: 'Alterado de L2 para L1',
+      substituicao: 'Pneu R2 substituído por novo',
+      sucateado: false,
+      vendido: false,
     },
-    {
-        placa: 'DEF-5678',
-        modelo: 'MB Atego (3 Eixos)',
-        eixos: 3,
-        pneus: [
-            { id: 201, placa: 'DEF-5678', fogo: 'FOGO201', pressao: 85, sulco: 7.2, posicao: 'L1', status: 'OK', recapagens: 1 },
-            { id: 202, placa: 'DEF-5678', fogo: 'FOGO202', pressao: 70, sulco: 3.5, posicao: 'R1', status: 'CRÍTICO', recapagens: 5 },
-            { id: 203, placa: 'DEF-5678', fogo: 'FOGO203', pressao: 75, sulco: 6.1, posicao: 'L2', status: 'OK', recapagens: 2 },
-            { id: 204, placa: 'DEF-5678', fogo: 'FOGO204', pressao: 80, sulco: 4.8, posicao: 'R2', status: 'ALERTA', recapagens: 4 },
-            { id: 205, placa: 'DEF-5678', fogo: 'FOGO205', pressao: 82, sulco: 6.5, posicao: 'L3', status: 'OK', recapagens: 0 },
-            { id: 206, placa: 'DEF-5678', fogo: 'FOGO206', pressao: 82, sulco: 6.4, posicao: 'R3', status: 'OK', recapagens: 0 },
-        ]
-    }
+    observacoesTecnico: 'Pneu L1 e L2 enviados para recapagem e sulcos estão dentro do limite.',
+    status: 'pendente',
+    operador: 'José (Zé) Rodrigues',
+    syncStatus: 'synced',
+  },
+  {
+    id: 10244,
+    placa: 'FGH5678',
+    veiculo: 'Carreta Randon',
+    dataHora: '12/10/2025 - 07:31',
+    timestampIso: '2025-10-12T07:31:00.000Z',
+    tipoServico: 'Sucata Imediata',
+    pneusEnvolvidos: 'R1',
+    profundidadeSulco: 1.5,
+    novaPressao: 95,
+    ultimaPressaoMedida: 115,
+    numeroFogo: '311',
+    movimentacoesRealizadas: {
+      rodizio: 'Sem alteração de posição',
+      substituicao: 'Pneu R1 substituído por estepe',
+      sucateado: true,
+      vendido: false,
+    },
+    observacoesTecnico: 'Sulco atingiu limite legal de 1,5 mm. Solicitação de descarte imediato.',
+    status: 'reprovado',
+    operador: 'José (Zé) Rodrigues',
+    homologadoPor: 'Antônio Carlos (Seu Carlos)',
+    justificativaGerente: 'Conferir numeração de fogo física antes da baixa definitiva no estoque.',
+    syncStatus: 'synced',
+  },
+  {
+    id: 10243,
+    placa: 'JKL9V01',
+    veiculo: 'Caminhão Scania R450',
+    dataHora: '11/10/2025 - 18:40',
+    timestampIso: '2025-10-11T18:40:00.000Z',
+    tipoServico: 'Recapagem',
+    pneusEnvolvidos: 'L2',
+    profundidadeSulco: 3.1,
+    novaPressao: 115,
+    ultimaPressaoMedida: 120,
+    numeroFogo: '403',
+    movimentacoesRealizadas: {
+      rodizio: 'Alterado de L2 para L3',
+      substituicao: 'Nenhuma substituição',
+      sucateado: false,
+      vendido: false,
+    },
+    observacoesTecnico: 'Pneu na faixa preventiva (3,1 mm). Encaminhado para 2ª vida de recapagem.',
+    status: 'aprovado',
+    operador: 'José (Zé) Rodrigues',
+    homologadoPor: 'Antônio Carlos (Seu Carlos)',
+    syncStatus: 'synced',
+  },
+  {
+    id: 10242,
+    placa: 'EJDH45',
+    veiculo: 'Caminhão Volvo FH 540',
+    dataHora: '10/10/2025 - 14:20',
+    timestampIso: '2025-10-10T14:20:00.000Z',
+    tipoServico: 'Recapagem',
+    pneusEnvolvidos: 'R2',
+    profundidadeSulco: 3.8,
+    novaPressao: 110,
+    ultimaPressaoMedida: 120,
+    numeroFogo: '190',
+    movimentacoesRealizadas: {
+      rodizio: 'Alterado de R2 para R3',
+      substituicao: 'Pneu R2 substituído por novo',
+      sucateado: false,
+      vendido: false,
+    },
+    observacoesTecnico: 'Aferição preventiva no pátio de Canoas/RS.',
+    status: 'pendente',
+    operador: 'José (Zé) Rodrigues',
+    syncStatus: 'synced',
+  },
 ];
 
 export const MOVIMENTACOES = [
-  'Sem Movimentação', 'Rodízio', 'Conserto', 'Recapagem', 'Estoque', 'Vendido', 'Sucateado'
+  'Recapagem',
+  'Rodízio',
+  'Substituição',
+  'Sem Movimentação',
+  'Conserto',
+  'Estoque',
+  'Vendido',
+  'Sucateado',
 ];
 
-export const DETALHES_RODIZIO = [
-  'Troca de Posição', 'Substituído', 'Descartado'
-];
+export const DETALHES_RODIZIO = ['Troca de Posição', 'Substituído', 'Descartado'];
 
-export const MOCK_HISTORICO: import('../types').HistoricoManutencao[] = [];
+export const MOCK_HISTORICO: HistoricoManutencao[] = [
+  {
+    id: 1,
+    pneuId: 2,
+    placa: 'EJDH45',
+    fogo: '190',
+    posicao: 'R1',
+    pressaoAnterior: 120,
+    sulcoAnterior: 5.5,
+    pressaoNova: 110,
+    sulcoNovo: 5.0,
+    recapagens: 0,
+    movimentacao: 'Recapagem',
+    detalheRodizio: 'Alterado da posição L1 para L2',
+    data: new Date().toISOString(),
+    usuario: 'José (Zé) Rodrigues',
+    syncStatus: 'synced',
+  },
+];

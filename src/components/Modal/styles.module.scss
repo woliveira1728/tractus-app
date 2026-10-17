@@ -1,57 +1,64 @@
 .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2000;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
 }
 
 .container {
-    width: 420px;
-    background: #fff;
-    border-radius: 8px;
-    max-height: 90vh;
-    overflow: auto;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 337px;
+  max-width: 94vw;
+  background: #FFFFFF;
+  border: 1px solid #E8ECF4;
+  border-radius: 8px;
+  max-height: 88vh;
+  overflow-y: auto;
+  box-shadow: 0 12px 32px rgba(30, 35, 44, 0.18);
+  position: relative;
 }
 
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem 1.25rem;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 8px 20px;
 }
 
 .title {
-    color: #FFFFFF;
-    font-size: 20px;
-    font-weight: 700;
-    background-color: #239258;
-    padding: .5rem;
-    border-radius: 50%;
-}
-
-.titleHistorical {
-    color: #000000;
-    font-size: 20px;
-    font-weight: 800;
+  margin: 0;
+  font-family: var(--font-primary);
+  color: #1E232C;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .closeBtn {
-    background: transparent;
-    color: #000000;
-    border: none;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
+  background: transparent;
+  color: #1E232C;
+  border: none;
+  font-family: var(--font-primary);
+  font-size: 24px;
+  font-weight: 300;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 8px;
+
+  &:hover {
+    background: #F7F8F9;
+  }
 }
 
-.titleReplacement {
-    color: #000000;
-    font-size: 1.25rem;
-    font-weight: 700;
-    border-radius: 50%;
+.body {
+  padding: 8px 20px 20px 20px;
 }

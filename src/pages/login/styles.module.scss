@@ -1,81 +1,248 @@
-
 .mainContainer {
+  flex: 1;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 28px) clamp(18px, 5vw, 28px) 24px;
   display: flex;
   flex-direction: column;
+}
+
+.welcomeTitle {
+  margin: 0 0 24px 0;
+  font-family: 'Urbanist', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: clamp(24px, 6.5vw, 30px);
+  line-height: 130%;
+  letter-spacing: -0.01em;
+  color: #1E232C;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  height: 56px;
+
+  input {
+    width: 100%;
+    height: 56px;
+    background: #F7F8F9;
+    border: 1px solid #E8ECF4;
+    border-radius: 8px;
+    padding: 0 48px 0 18px;
+    font-family: 'Urbanist', sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 125%;
+    color: #1E232C;
+    outline: none;
+    transition: border-color 0.15s ease;
+
+    &::placeholder {
+      color: #8391A1;
+    }
+
+    &:focus {
+      border-color: #34C759;
+      background: #FFFFFF;
+    }
+  }
+}
+
+.eyeButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #6A707C;
+  cursor: pointer;
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  gap: 1.875rem;
+}
 
-  h1 {
-    margin-top: 1.875rem;
-    margin-bottom: 1.25rem;
-    font-size: 2.5rem;
-    font-weight: 700;
+.forgotRow {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -2px;
+  margin-bottom: 6px;
+}
+
+.forgotLink {
+  background: transparent;
+  border: none;
+  padding: 4px 0;
+  font-family: 'Urbanist', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #6A707C;
+  cursor: pointer;
+
+  &:hover {
+    color: #1E232C;
+    text-decoration: underline;
   }
+}
 
-  .formContainer {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-width: 300px;
-    gap: 1.875rem;
+.loginSubmitBtn {
+  width: 100%;
+  min-height: 56px;
+  background: #1E232C;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Urbanist', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 18px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
 
-    .inputWrapper {
-      position: relative;
-      width: 100%;
-
-      .inputIcon {
-        position: absolute;
-        top: 50%;
-        left: 1rem;
-        transform: translateY(-50%);
-        color: #ccc;
-      }
-    }
-
-    input {
-      width: 100%;
-      color: #000000;
-      box-sizing: border-box;
-      padding: 0.75rem;
-      padding-left: 3rem;
-      font-size: 1rem;
-      font-weight: 600;
-      border: .1875rem solid #ccc;
-      border-radius: .75rem;
-
-      &:focus {
-        outline: none;
-        border-color: #239258;
-      }
-    }
-
-    button {
-      padding: 0.75rem;
-      font-size: 1.25rem;
-      font-weight: 700;
-      background-color: #239258;
-      color: #000000;
-      border: none;
-      border-radius: 1.5625rem;
-      cursor: pointer;
-      padding-top: 1.25rem;
-      padding-bottom: 1.25rem;
-
-      &:hover {
-        background-color: #1e7e4c;
-      }
-    }
+  &:hover {
+    background: #2c3340;
   }
+}
 
-  a {
-    margin-top: 1.875rem;
-    color: #000000;
-    text-decoration: none;
+.dividerRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 26px 0 18px 0;
+  width: 100%;
+}
 
-    &:hover {
-      text-decoration: underline;
-    }
+.line {
+  flex: 1;
+  height: 1px;
+  background: #E8ECF4;
+}
+
+.dividerText {
+  font-family: 'Urbanist', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 17px;
+  color: #6A707C;
+  white-space: nowrap;
+}
+
+.socialRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.socialBtn {
+  flex: 1;
+  min-height: 56px;
+  background: #FFFFFF;
+  border: 1px solid #E8ECF4;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: #F7F8F9;
+  }
+}
+
+.demoBox {
+  margin-top: 20px;
+  padding: 12px;
+  background: #F7F8F9;
+  border: 1px dashed #CBD5E1;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.demoLabel {
+  font-family: 'Urbanist', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6A707C;
+  text-align: center;
+}
+
+.demoButtons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.demoBtnBorracheiro,
+.demoBtnGerente {
+  flex: 1 1 130px;
+  min-height: 42px;
+  border-radius: 8px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s ease;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.demoBtnBorracheiro {
+  background: #34C759;
+  color: #FFFFFF;
+}
+
+.demoBtnGerente {
+  background: #1E232C;
+  color: #FFFFFF;
+}
+
+.bottomRegisterText {
+  margin: auto 0 0 0;
+  padding-top: 24px;
+  font-family: 'Urbanist', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 140%;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: #1E232C;
+}
+
+.highlightLink {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  color: #34C759;
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
   }
 }
