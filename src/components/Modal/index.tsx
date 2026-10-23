@@ -30,7 +30,7 @@ const Modal = ({ isOpen, onClose, title, hideHeader = false, children }: ModalPr
       <div className={styles.container}>
         {!hideHeader && (
           <div className={styles.header}>
-            {title ? <h3 className={styles.title}>{title}</h3> : <span />}
+            {title ? <h3 className={styles.title}>Pneu - {title}</h3> : <span />}
             <button aria-label="Fechar" className={styles.closeBtn} onClick={onClose}>
               ×
             </button>

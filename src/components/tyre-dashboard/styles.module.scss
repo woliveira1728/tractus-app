@@ -7,6 +7,15 @@
     padding: 2rem;
     gap: 1.875rem;
 
+    .infoContainer{
+        width: 100%;
+        p {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin: 0 0 0.5rem;
+        }
+    }
+
     select {
         padding: 0.75rem;
         font-size: 1.25rem;
@@ -15,6 +24,8 @@
         border-radius: 0.625rem;
         background-color: #ffffff;
         color: #000000;
+        width: 100%;
+        box-sizing: border-box;
 
         option {
             font-size: 1.25rem;
