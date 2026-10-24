@@ -1,3 +1,4 @@
+
 import { Route, Routes } from 'react-router-dom';
 import {
   HomePage,
@@ -11,6 +12,8 @@ import {
   Historical,
 } from '../../pages';
 
+import ManagerServices from '../../pages/manager-services';
+
 const RoutesMain = () => {
   return (
     <Routes>
@@ -23,6 +26,9 @@ const RoutesMain = () => {
       <Route path="/identification-by-plate" element={<IdentificationByPlate />} />
       <Route path="/vehicle-dashboard" element={<VehicleDashboard />} />
       <Route path="/historical" element={<Historical />} />
+
+      {/* Jornada do Gerente */}
+      <Route path="/manager/services" element={<ManagerServices />} />
     </Routes>
   );
 };
