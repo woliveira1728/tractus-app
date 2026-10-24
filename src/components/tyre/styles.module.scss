@@ -1,71 +1,81 @@
 .tyreInfoSection {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  text-align: left;
+  font-family: 'Urbanist', sans-serif;
+
+  .infoContainer {
     width: 100%;
-    text-align: left;
     display: flex;
     flex-direction: column;
-    gap: 2.5rem;
-    
-    .infoContainer {
-        display: flex;
-        flex-direction: column;
-        gap: 0.625rem;
-    
-        p {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #000000;
-            margin: 0;
-        }
-    
-        span {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: black;
-        }
-    
-        input {
-            padding: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #000000;
-            border: 2px solid #cccccc;
-            border-radius: 0.625rem;
-    
-            &[type="number"] {
-                -moz-appearance: textfield;
-                appearance: textfield;
-                &::-webkit-outer-spin-button,
-                &::-webkit-inner-spin-button {
-                    -webkit-appearance: none;
-                    margin: 0;
-                }
-            }
-    
-            &:focus {
-                outline: none;
-                border-color: #239258;
-            }
-        }
-    
-        select {
-            padding: 0.75rem;
-            font-size: 1.25rem;
-            font-weight: 700;
-            border: 2px solid #cccccc;
-            border-radius: 0.625rem;
-            background-color: #ffffff;
-            color: #000000;
-    
-            option {
-                font-size: 1.25rem;
-            }
-    
-            &:focus {
-                outline: none;
-                border-color: #239258;
-            }
-        }
+    gap: 8px;
+
+    p {
+      margin: 0;
+      font-weight: 700;
+      font-size: 16px;
+      color: #1E232C;
     }
+
+    input {
+      width: 100%;
+      height: 56px;
+      background: #F7F8F9;
+      border: 1px solid #E8ECF4;
+      border-radius: 8px;
+      padding: 0 48px 0 18px;
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: #1E232C;
+      outline: none;
+      transition: border-color 0.15s ease;
+
+      &::placeholder {
+        color: #8391A1;
+      }
+
+      &:focus {
+        border-color: #34C759;
+        background: #FFFFFF;
+      }
+
+      &[type="number"] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
+    }
+  }
+}
+
+.card {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 18px;
+  background: #F7F8F9;
+  border: 1px solid #E8ECF4;
+  border-radius: 8px;
+}
+
+.cardValor {
+  font-weight: 600;
+  font-size: 15px;
+  color: #6A707C;
+
+  small {
+    font-size: 13px;
+    font-weight: 500;
+    color: #8391A1;
+  }
 }
 
 .inputWrapper {
@@ -73,56 +83,57 @@
   width: 100%;
 }
 
-.tyreInfoSection {
-  width: 100%;
-  .infoContainer { width: 100%; }
-  input { width: 100%; box-sizing: border-box; }
-}
-
-// CSS dos alertas
 .icone {
   position: absolute;
-  right: 14px;
+  right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 22px;
+  font-size: 20px;
   pointer-events: none;
 }
-.inputCritical { border-color: #d32f2f !important; }
-.inputWarning { border-color: #e67e00 !important; }
+
+.inputCritical {
+  border-color: #D82D30 !important;
+}
+
+.inputWarning {
+  border-color: #FFB30E !important;
+}
+
 .alertaTexto {
   display: flex;
   flex-direction: column;
-  .titulo { font-size: 13px; font-weight: 700; }
-  .descricao { font-size: 12px; font-weight: 400; line-height: 1.4; }
-}
-.critical { color: #d32f2f; }
-.warning { color: #e67e00; }
+  gap: 4px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border-left: 4px solid transparent;
 
-//Ajustando medidas já registradas
-// Cards de medidas anteriores
-.resumo {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-}
-.card {
-    padding: 12px 14px;
-    background: #f1f8f4;
-    border: 1px solid #cfe6d9;
-    border-left: 5px solid #239258;
-    border-radius: 10px;
-}
-.cardLabel {
+  .titulo {
+    font-size: 13px;
+    font-weight: 700;
+  }
 
-    font-weight: 600;
-    color: #5f6b7a;
-    margin-bottom: 4px;
+  .descricao {
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.4;
+  }
 }
-.cardValor {
-    font-size: 1.25rem;
-    font-weight: 800;
-    color: #1a1a1a;
-    small { font-size: 13px; font-weight: 600; color: #5f6b7a; }
+
+.critical {
+  color: #991B1B;
+
+  &.alertaTexto {
+    background: #FEE2E2;
+    border-left-color: #D82D30;
+  }
+}
+
+.warning {
+  color: #92400E;
+
+  &.alertaTexto {
+    background: #FEF3C7;
+    border-left-color: #FFB30E;
+  }
 }

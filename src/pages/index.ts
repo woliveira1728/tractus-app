@@ -6,6 +6,7 @@ import Identification from './identification';
 import IdentificationByQrCode from './identification-by-qrcode';
 import IdentificationByPlate from './identification-by-plate';
 import VehicleDashboard from './vehicle-dashboard';
+import ReportSent from './report-sent';
 import TyreDashboard from '../components/tyre-dashboard';
 import Historical from '../components/historical';
 
@@ -19,5 +20,6 @@ export {
   IdentificationByQrCode,
   IdentificationByPlate,
   VehicleDashboard,
+  ReportSent,
   TyreDashboard,
 };
