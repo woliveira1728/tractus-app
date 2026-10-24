@@ -100,6 +100,32 @@ export const MOCK_VEHICLES: Veiculo[] = [
       { id: 406, placa: 'JKL9V01', fogo: '406', pressao: 118, ultimaPressao: 120, sulco: 6.8, posicao: 'R3', status: 'OK', recapagens: 0 },
     ],
   },
+  {
+    placa: 'MNO2B34',
+    modelo: 'Caminhão VW Delivery (2 Eixos)',
+    eixos: 2,
+    pneus: [
+      { id: 501, placa: 'MNO2B34', fogo: '501', pressao: 100, ultimaPressao: 105, sulco: 7.0, posicao: 'L1', status: 'OK', recapagens: 0 },
+      { id: 502, placa: 'MNO2B34', fogo: '502', pressao: 100, ultimaPressao: 105, sulco: 7.0, posicao: 'R1', status: 'OK', recapagens: 0 },
+      { id: 503, placa: 'MNO2B34', fogo: '503', pressao: 98, ultimaPressao: 105, sulco: 4.2, posicao: 'L2', status: 'OK', recapagens: 1 },
+      { id: 504, placa: 'MNO2B34', fogo: '504', pressao: 98, ultimaPressao: 105, sulco: 2.9, posicao: 'R2', status: 'ALERTA', recapagens: 1 },
+    ],
+  },
+  {
+    placa: 'PQR7C89',
+    modelo: 'Caminhão Mercedes Actros (4 Eixos)',
+    eixos: 4,
+    pneus: [
+      { id: 601, placa: 'PQR7C89', fogo: '601', pressao: 120, ultimaPressao: 120, sulco: 8.0, posicao: 'L1', status: 'OK', recapagens: 0 },
+      { id: 602, placa: 'PQR7C89', fogo: '602', pressao: 120, ultimaPressao: 120, sulco: 8.0, posicao: 'R1', status: 'OK', recapagens: 0 },
+      { id: 603, placa: 'PQR7C89', fogo: '603', pressao: 115, ultimaPressao: 120, sulco: 6.3, posicao: 'L2', status: 'OK', recapagens: 1 },
+      { id: 604, placa: 'PQR7C89', fogo: '604', pressao: 115, ultimaPressao: 120, sulco: 6.1, posicao: 'R2', status: 'OK', recapagens: 1 },
+      { id: 605, placa: 'PQR7C89', fogo: '605', pressao: 112, ultimaPressao: 120, sulco: 3.3, posicao: 'L3', status: 'ALERTA', recapagens: 2 },
+      { id: 606, placa: 'PQR7C89', fogo: '606', pressao: 112, ultimaPressao: 120, sulco: 5.4, posicao: 'R3', status: 'OK', recapagens: 1 },
+      { id: 607, placa: 'PQR7C89', fogo: '607', pressao: 110, ultimaPressao: 118, sulco: 5.9, posicao: 'L4', status: 'OK', recapagens: 0 },
+      { id: 608, placa: 'PQR7C89', fogo: '608', pressao: 110, ultimaPressao: 118, sulco: 5.9, posicao: 'R4', status: 'OK', recapagens: 0 },
+    ],
+  },
 ];
 
 // Ordens de Serviço pré-cadastradas conforme Imagens 4.8 e 4.10 do Protótipo de Alta Fidelidade

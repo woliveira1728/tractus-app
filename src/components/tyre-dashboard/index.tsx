@@ -3,9 +3,9 @@ import Caster from '../caster';
 import Tyre from '../tyre';
 import { useUser } from '../../providers/userContextValues';
 import ReplacementTyreModal from '../replacement-tyre';
+import Dropdown from '../dropdown';
 import TemplatePage from '../../pages/template';
 import styles from './styles.module.scss';
-import type { ChangeEvent } from 'react';
 import type { Pneu } from '../../types';
 
 type TyreDashboardContentProps = {
@@ -14,20 +14,12 @@ type TyreDashboardContentProps = {
 };
 
 export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProps) => {
-  const [ movement, setMovement ] = React.useState(false);
+  const [movementValue, setMovementValue] = React.useState('sem-movimentacao');
+  const movement = movementValue === 'substituicao';
   const [novaPressao, setNovaPressao] = React.useState<string>('');
   const [novoSulco, setNovoSulco] = React.useState<string>('');
 
   const { updateTyreMeasurements, replaceTyre } = useUser();
-
-  const handleMovementChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    if (value === 'substituicao') {
-      setMovement(true);
-    } else {
-      setMovement(false);
-    }
-  };
 
   const [substitutionRequested, setSubstitutionRequested] = React.useState(false);
   const [replacementOpen, setReplacementOpen] = React.useState(false);
@@ -38,10 +30,15 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
 
       <div className={styles.infoContainer}>
         <p>Movimentação</p>
-        <select name="movement" id="movement" defaultValue="sem-movimentacao" onChange={handleMovementChange}>
-          <option value="sem-movimentacao">Sem movimentação</option>
-          <option value="substituicao">Substituição</option>
-        </select>
+        <Dropdown
+          ariaLabel="Movimentação"
+          value={movementValue}
+          onChange={setMovementValue}
+          options={[
+            { value: 'sem-movimentacao', label: 'Sem movimentação' },
+            { value: 'substituicao', label: 'Substituição' },
+          ]}
+        />
       </div>
 
       <button

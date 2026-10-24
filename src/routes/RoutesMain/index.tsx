@@ -8,6 +8,7 @@ import {
   ForgotPassword,
   IdentificationByPlate,
   VehicleDashboard,
+  ReportSent,
   Historical,
 } from '../../pages';
 
@@ -22,6 +23,7 @@ const RoutesMain = () => {
       <Route path="/identification-by-qrcode" element={<IdentificationByQrCode />} />
       <Route path="/identification-by-plate" element={<IdentificationByPlate />} />
       <Route path="/vehicle-dashboard" element={<VehicleDashboard />} />
+      <Route path="/report-sent" element={<ReportSent />} />
       <Route path="/historical" element={<Historical />} />
     </Routes>
   );
