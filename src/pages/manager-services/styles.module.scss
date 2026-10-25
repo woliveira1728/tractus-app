@@ -231,3 +231,19 @@
     height: 36px;
   }
 }
+
+.cardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #2ac653;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #2ac653;
+    outline-offset: 3px;
+  }
+}

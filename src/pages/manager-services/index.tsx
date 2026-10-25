@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { FiSearch, FiMenu } from 'react-icons/fi';
 import pneuTractus from '../../assets/frame29-pneu.svg';
 import TemplatePage from '../template';
@@ -122,7 +122,11 @@ function ManagerServicesPage() {
             </p>
           ) : (
             filteredOrders.map((order) => (
-              <article key={order.id} className={styles.card}>
+              <Link
+                key={order.id}
+                to={`/manager/services/${order.id}`}
+                className={`${styles.card} ${styles.cardLink}`}
+              >
                 <div className={styles.cardHeader}>
                   <h2>Serviço #{order.id}</h2>
 
@@ -144,7 +148,7 @@ function ManagerServicesPage() {
                     <p>Data: {order.dataHora}</p>
                   </div>
                 </div>
-              </article>
+              </Link>
             ))
           )}
         </div>
