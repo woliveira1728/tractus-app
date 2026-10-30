@@ -11,18 +11,38 @@ import type { Pneu } from '../../types';
 type TyreDashboardContentProps = {
   tyre?: Pneu | null;
   onClose?: () => void;
+  editado?: boolean;
+  onSaved?: (posicao: string) => void;
 };
 
-export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProps) => {
+export const TyreDashboardContent = ({ tyre, onClose, editado, onSaved }: TyreDashboardContentProps) => {
   const [movementValue, setMovementValue] = React.useState('sem-movimentacao');
   const movement = movementValue === 'substituicao';
-  const [novaPressao, setNovaPressao] = React.useState<string>('');
-  const [novoSulco, setNovoSulco] = React.useState<string>('');
+  const [novaPressao, setNovaPressao] = React.useState<string>(editado && tyre ? String(tyre.pressao) : '');
+  const [novoSulco, setNovoSulco] = React.useState<string>(editado && tyre ? String(tyre.sulco) : '');
+  const [substitutionRequested, setSubstitutionRequested] = React.useState(false);
+  const [replacementOpen, setReplacementOpen] = React.useState(false);
 
   const { updateTyreMeasurements, replaceTyre } = useUser();
 
-  const [substitutionRequested, setSubstitutionRequested] = React.useState(false);
-  const [replacementOpen, setReplacementOpen] = React.useState(false);
+  const voltar = () => {
+    if (tyre) onSaved?.(tyre.posicao);
+    if (onClose) onClose();
+  };
+
+  const salvar = () => {
+    if (!tyre) return;
+    const rawSulco = (novoSulco ?? '').toString().replace(',', '.');
+    const sulcoVal = rawSulco ? parseFloat(rawSulco) : undefined;
+    const pressVal = novaPressao ? parseFloat(novaPressao) : undefined;
+    const saved = updateTyreMeasurements ? updateTyreMeasurements(tyre.id, pressVal, sulcoVal, 'Sem Movimentação', true) : false;
+    if (!saved) return;
+    if (substitutionRequested) {
+      setReplacementOpen(true);
+      return;
+    }
+    voltar();
+  };
 
   return (
     <main className={styles.tyreDashboardContainer}>
@@ -41,32 +61,7 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
         />
       </div>
 
-      <button
-        className={styles.button}
-        onClick={() => {
-          if (!tyre) return;
-          const rawSulco = (novoSulco ?? '').toString().replace(',', '.');
-          const sulcoVal = rawSulco ? parseFloat(rawSulco) : undefined;
-          const pressVal = novaPressao ? parseFloat(novaPressao) : undefined;
-
-          // if substitutionRequested we suppress the immediate toast; the replacement modal will trigger confirmation
-          const saved = updateTyreMeasurements ? updateTyreMeasurements(tyre.id, pressVal, sulcoVal, 'Sem Movimentação', substitutionRequested) : false;
-
-          // when saved:
-          if (saved) {
-            if (substitutionRequested) {
-              // open replacement modal so user can provide new tyre data
-              setReplacementOpen(true);
-              return;
-            }
-
-            // For 'Sem movimentação' we close all modals and return to tyre dashboard
-            setNovaPressao('');
-            setNovoSulco('');
-            if (onClose) onClose();
-          }
-        }}
-      > Salvar e avançar </button>
+      <button className={styles.button} onClick={salvar}>Salvar e avançar</button>
 
       <ReplacementTyreModal
         isOpen={replacementOpen}
@@ -76,16 +71,10 @@ export const TyreDashboardContent = ({ tyre, onClose }: TyreDashboardContentProp
             setReplacementOpen(false);
             return;
           }
-          // Use provider centralized replaceTyre to perform substitution and historico
-          if (replaceTyre) {
-            replaceTyre(tyre.id, newTyre, 'Substituição - novo pneu');
-          }
-
+          if (replaceTyre) replaceTyre(tyre.id, newTyre, 'Substituição - novo pneu');
           setReplacementOpen(false);
           setSubstitutionRequested(false);
-
-          // After replacement is saved, close all modals and return to tyre dashboard
-          if (onClose) onClose();
+          voltar();
         }}
       />
     </main>

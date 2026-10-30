@@ -73,6 +73,15 @@ const Header = ({ showBack = true, onBack, hideNavRow = false }: HeaderProps) =>
           </button>
         </div>
       </div>
+      {!isOnline && (
+        <div className={styles.offlineBanner}>
+          <FiWifiOff size={18} />
+          <span>
+            Você está offline.
+            {pendingSyncCount > 0 ? ` ${pendingSyncCount} registro(s) aguardando envio.` : ' Os registros serão enviados quando a conexão voltar.'}
+          </span>
+        </div>
+      )}
     </header>
   );
 };

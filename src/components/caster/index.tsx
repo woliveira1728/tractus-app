@@ -1,73 +1,74 @@
-import { useState } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
 import Dropdown from '../dropdown';
 import { useUser } from '../../providers/userContextValues';
 import type { Pneu } from '../../types';
 
+type Resposta = 'sim' | 'nao' | null;
+
+type SimNaoProps = {
+  pergunta: string;
+  valor: Resposta;
+  onChange: (v: Resposta) => void;
+};
+
+// Pergunta com botões grandes de Sim e Não
+const SimNao = ({ pergunta, valor, onChange }: SimNaoProps) => (
+  <div className={styles.pergunta}>
+    <p>{pergunta}</p>
+    <div className={styles.botoes}>
+      <button type="button" className={`${styles.botao} ${valor === 'sim' ? styles.ativo : ''}`} onClick={() => onChange('sim')}>Sim</button>
+      <button type="button" className={`${styles.botao} ${valor === 'nao' ? styles.ativo : ''}`} onClick={() => onChange('nao')}>Não</button>
+    </div>
+  </div>
+);
+
 const Caster = ({ tyre, onSubstitutionChange }: { tyre: Pneu; onSubstitutionChange?: (v: boolean) => void }) => {
-    const { vehicleSelected } = useUser();
-    const tyresPositions = vehicleSelected ? vehicleSelected.pneus.map(p => p.posicao) : [];
-    const [newPosition, setNewPosition] = useState(tyre.posicao);
+  const { vehicleSelected } = useUser();
+  const tyresPositions = vehicleSelected ? vehicleSelected.pneus.map(p => p.posicao) : [];
+  const opcoes = tyresPositions.map(p => ({ value: p, label: p }));
 
+  const [alteracao, setAlteracao] = React.useState<Resposta>(null);
+  const [recapagem, setRecapagem] = React.useState<Resposta>(null);
+  const [substituicao, setSubstituicao] = React.useState<Resposta>('nao');
+  const [vendido, setVendido] = React.useState<Resposta>(null);
+  const [sucateado, setSucateado] = React.useState<Resposta>(null);
+  const [de, setDe] = React.useState(tyre.posicao);
+  const [para, setPara] = React.useState(tyre.posicao);
 
-    return (
-        <div className={styles.contentServices}>
-            <div className={styles.serviceItem}>
-                <p>Substituição</p>
-            </div>
-            <div className={styles.descriptionContainer}>
-                <div className={styles.descriptionItem}>
-                    <p>Alteração de posição (Rodízio):</p>
-                    <div className={styles.selectContainer}>
-                        <p>De <span>{tyre.posicao}</span> para</p>
-                        <Dropdown
-                            size="small"
-                            ariaLabel="Nova posição"
-                            value={newPosition}
-                            onChange={setNewPosition}
-                            options={tyresPositions.map(position => ({ value: position, label: position }))}
-                        />
-                    </div>
-                </div>
-                
-                <p>Enviado para recapagem?</p>
-                <div className={styles.radioContainer}>
-                    <input type="radio" id="recapagem-yes" name="recapagem" value="yes" />
-                    <label htmlFor="recapagem-yes">Sim</label>
-                    
-                    <input type="radio" id="recapagem-no" name="recapagem" value="no" />
-                    <label htmlFor="recapagem-no">Não</label>
-                </div>
+  const handleSubstituicao = (v: Resposta) => {
+    setSubstituicao(v);
+    onSubstitutionChange?.(v === 'sim');
+  };
 
-                <p>Substituição de pneu?</p>
-                <div className={styles.radioContainer}>
-                    <input type="radio" id="substitution-yes" name="substitution" value="yes" onChange={() => onSubstitutionChange?.(true)} />
-                    <label htmlFor="substitution-yes">Sim</label>
-                    
-                    <input type="radio" id="substitution-no" name="substitution" value="no" defaultChecked onChange={() => onSubstitutionChange?.(false)} />
-                    <label htmlFor="substitution-no">Não</label>
-                </div>
-                
-                <p>O pneu foi vendido?</p>
-                <div className={styles.radioContainer}>
-                    <input type="radio" id="sold-yes" name="sold" value="yes" />
-                    <label htmlFor="sold-yes">Sim</label>
-                    
-                    <input type="radio" id="sold-no" name="sold" value="no" />
-                    <label htmlFor="sold-no">Não</label>
-                </div>
+  return (
+    <div className={styles.contentServices}>
+      <h2 className={styles.tituloRodizio}>Rodízio - {tyre.posicao}</h2>
 
-                <p>O pneu foi sucateado?</p>
-                <div className={styles.radioContainer}>
-                    <input type="radio" id="scrapped-yes" name="scrapped" value="yes" />
-                    <label htmlFor="scrapped-yes">Sim</label>
-                    
-                    <input type="radio" id="scrapped-no" name="scrapped" value="no" />
-                    <label htmlFor="scrapped-no">Não</label>
-                </div>
-            </div>
-        </div>
-    );
+      <div className={styles.descriptionContainer}>
+        <SimNao pergunta="Alteração da posição?" valor={alteracao} onChange={setAlteracao} />
+
+        {/* Seletores De / Para */}
+        {alteracao === 'sim' && (
+          <div className={styles.dePara}>
+            <label>
+              De
+              <Dropdown size="small" ariaLabel="Posição de origem" value={de} onChange={setDe} options={opcoes} />
+            </label>
+            <label>
+              Para
+              <Dropdown size="small" ariaLabel="Nova posição" value={para} onChange={setPara} options={opcoes} />
+            </label>
+          </div>
+        )}
+
+        <SimNao pergunta="Enviado para recapagem?" valor={recapagem} onChange={setRecapagem} />
+        <SimNao pergunta="Substituição de pneu?" valor={substituicao} onChange={handleSubstituicao} />
+        <SimNao pergunta="Pneu foi vendido?" valor={vendido} onChange={setVendido} />
+        <SimNao pergunta="Pneu foi sucateado?" valor={sucateado} onChange={setSucateado} />
+      </div>
+    </div>
+  );
 };
 
 export default Caster;

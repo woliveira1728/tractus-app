@@ -6,18 +6,14 @@ type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  prefix?: string;
   hideHeader?: boolean;
   children: React.ReactNode;
 };
 
-const Modal = ({ isOpen, onClose, title, hideHeader = false, children }: ModalProps) => {
+const Modal = ({ isOpen, onClose, title, prefix = 'Pneu', hideHeader = false, children }: ModalProps) => {
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-
+    document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => {
       document.body.style.overflow = '';
     };
@@ -30,10 +26,8 @@ const Modal = ({ isOpen, onClose, title, hideHeader = false, children }: ModalPr
       <div className={styles.container}>
         {!hideHeader && (
           <div className={styles.header}>
-            {title ? <h3 className={styles.title}>Pneu - {title}</h3> : <span />}
-            <button aria-label="Fechar" className={styles.closeBtn} onClick={onClose}>
-              ×
-            </button>
+            {title ? <h3 className={styles.title}>{prefix} - {title}</h3> : <span />}
+            <button aria-label="Fechar" className={styles.closeBtn} onClick={onClose}>×</button>
           </div>
         )}
         <div className={styles.body}>{children}</div>

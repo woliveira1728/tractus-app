@@ -132,16 +132,9 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [isOnline, syncQueue.length, syncPendingRecords]);
 
+  //Retirei a função de teste para modo offline e implementei um novo no header - Camile
   const toggleOfflineSimulation = () => {
-    setSimulatedOffline((prev) => {
-      const next = !prev;
-      if (next) {
-        toast.warning('Modo Offline ativado. Registros serão salvos na fila local (IndexedDB).');
-      } else {
-        toast.info('Conexão restabelecida (Modo Online).');
-      }
-      return next;
-    });
+    setSimulatedOffline((prev) => !prev);
   };
 
   // RF01 - Autenticação por Perfis com Redirecionamento Dinâmico
