@@ -122,3 +122,10 @@
         }
 
     }
+
+.tituloRodizio{font-size:20px;font-weight:700;margin-bottom:12px;}
+.pergunta{width:100%;p{margin-bottom:8px;font-weight:600;}}
+.botoes{display:flex;gap:12px;width:100%;}
+.botao{flex:1;min-height:48px;font-size:18px;font-weight:700;border:2px solid #239258;border-radius:10px;background:#fff;color:#239258;cursor:pointer;}
+.ativo{background:#239258;color:#fff;}
+.dePara{display:flex;gap:12px;width:100%;label{flex:1;display:flex;flex-direction:column;gap:4px;font-weight:600;}select{min-height:48px;font-size:16px;}}
