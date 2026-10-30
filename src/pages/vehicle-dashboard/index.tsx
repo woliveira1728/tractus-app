@@ -56,8 +56,8 @@ const VehicleDashboard = () => {
   return (
     <TemplatePage>
       <main className={styles.vehicleDashboardContainer}>
+        {mensagem && <div className={styles.msgSalvo}>{mensagem}</div>}
         <h1 className={styles.title}>Painel Visual do Veículo</h1>
-        {mensagem && <div className={styles.msgSalvo}>✅ {mensagem}</div>}
 
         {!vehicleSelected ? (
           <p className={styles.emptyMessage}>Nenhum veículo selecionado.</p>

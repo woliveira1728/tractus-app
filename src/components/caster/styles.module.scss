@@ -127,18 +127,28 @@
 .botao {
   flex: 1;
   min-height: 48px;
+  font-family: 'Urbanist', sans-serif;
   font-size: 18px;
   font-weight: 700;
-  border: 2px solid #239258;
-  border-radius: 10px;
+  border: 2px solid #34C759;
+  border-radius: 8px;
   background: #FFFFFF;
-  color: #239258;
+  color: #34C759;
   cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: #F7F8F9;
+  }
 }
 
 .ativo {
-  background: #239258;
+  background: #34C759;
   color: #FFFFFF;
+
+  &:hover {
+    background: #28B446;
+  }
 }
 
 .dePara {
