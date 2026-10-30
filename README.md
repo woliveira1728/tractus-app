@@ -91,11 +91,14 @@ Este projeto é resultado de pesquisa e desenvolvimento para a disciplina **Labo
 
 Autores do projeto:
 
-- Wilson Dias de Oliveira(ADS)
-- Diosefy Gonçalves Pereira(ADS)
-- Samanta Teixeira Portilho(GTI)
-- Gustavo Henrique Baumann(ADS)
-- João Vitor Spelier Nunes(ADS)
+- Wilson Dias de Oliveira (ADS)
+- Diosefy Gonçalves Pereira (ADS)
+- Samanta Teixeira Portilho (GTI)
+- Gustavo Henrique Baumann (ADS)
+- João Vitor Spelier Nunes (ADS)
+- João Vitor Lacerda de Oliveira (ADS)
+- Arthur Henrique Vieira Santos 
+- Camile Kaghofer Schicht
 
 ---
 
@@ -170,8 +173,11 @@ This project is the result of research and development for the course **Laborato
 
 Project authors:
 
-- Wilson Dias de Oliveira(ASD)
-- Diosefy Gonçalves Pereira(ASD)
-- Samanta Teixeira Portilho(ITM)
-- Gustavo Henrique Baumann(ASD)
-- João Vitor Spelier Nunes()ASD
+- Wilson Dias de Oliveira (ASD)
+- Diosefy Gonçalves Pereira (ASD)
+- Samanta Teixeira Portilho (ITM)
+- Gustavo Henrique Baumann (ASD)
+- João Vitor Spelier Nunes (ADS)
+- João Vitor Lacerda de Oliveira (ADS)
+- Arthur Henrique Vieira Santos 
+- Camile Kaghofer Schicht

@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+
 import {
   HomePage,
   LoginPage,
@@ -8,8 +9,14 @@ import {
   ForgotPassword,
   IdentificationByPlate,
   VehicleDashboard,
+  ReportSent,
   Historical,
 } from '../../pages';
+
+import ManagerServices from '../../pages/manager-services';
+import ManagerServiceDetails from '../../pages/manager-service-details';
+import ManagerServiceApproved from '../../pages/manager-service-approved';
+import ManagerServiceRejected from '../../pages/manager-service-rejected';
 
 const RoutesMain = () => {
   return (
@@ -22,7 +29,18 @@ const RoutesMain = () => {
       <Route path="/identification-by-qrcode" element={<IdentificationByQrCode />} />
       <Route path="/identification-by-plate" element={<IdentificationByPlate />} />
       <Route path="/vehicle-dashboard" element={<VehicleDashboard />} />
+      <Route path="/report-sent" element={<ReportSent />} />
       <Route path="/historical" element={<Historical />} />
+
+      {/* Jornada do Gerente */}
+      <Route path="/manager/services" element={<ManagerServices />}
+      />
+      <Route path="/manager/services/:id" element={<ManagerServiceDetails />}
+      />
+      <Route path="/manager/service-approved" element={<ManagerServiceApproved />}
+      />
+      <Route path="/manager/service-rejected" element={<ManagerServiceRejected />}
+      />
     </Routes>
   );
 };

@@ -1,131 +1,156 @@
-    .contentServices {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 1.25rem .625rem;
-        border-radius: .625rem;
-        border: .1563rem solid #CCCCCC;
-        gap: .625rem;
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-family: 'Urbanist', sans-serif;
 
-        .serviceTitle {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-align: left;
-            width: 100%;
-            padding-bottom: .9375rem;
-            border-bottom: .1563rem solid #CCCCCC;
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 
-            span {
-                color: #FFFFFF;
-                background-color: #239258;
-                padding: .25rem .5rem;
-                border-radius: 50%;
-            }
-        }
-
-        .serviceItem{
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            justify-content: space-between;
-            font-weight: 700;
-            width: 100%;
-
-            p {
-                text-align: left;
-            }
-
-        }
-
-        .descriptionContainer {
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            gap: 1.25rem;
-            border: .1563rem solid #CCCCCC;
-            padding-inline: .625rem;
-            padding-block: 1.25rem;
-            border-radius: .625rem;
-
-            .descriptionItem {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: space-between;
-                width: 100%;
-                font-weight: 700;
-                gap: 1.25rem;
-
-                .selectContainer {
-                    display: flex;
-                    align-items: center;
-                    justify-content: flex-start;
-                    width: 100%;
-                    gap: .625rem;
-
-                    p {
-                        font-weight: 700;
-                        font-size: 20px;
-
-                        span {
-                            font-weight: 700;
-                        }
-                    }
-                    
-                    .select {
-                        padding: .5rem;
-                        border-radius: .3125rem;
-                        border: .125rem solid #CCCCCC;
-                        font-size: 12px;
-                        font-weight: 400;
-    
-                        &:focus {
-                            outline: none;
-                            border-color: #239258;
-                        }
-                    }
-                }
-            }
-
-            p {
-                width: 100%;
-                font-weight: 700;
-
-                span {
-                    font-weight: 400;
-                }
-            }
-
-            .radioContainer {
-                width: 100%;
-                display: flex;
-                flex-direction: row;
-                align-items: flex-start;
-                gap: 1.25rem;
-
-                input[type="radio"] {
-                    width: 1.25rem;
-                    height: 1.25rem;
-                }
-
-                label {
-                    font-size: 1.25rem;
-                    font-weight: 700;
-                }
-            }
-
-        }
-
+    label {
+      font-weight: 700;
+      font-size: 16px;
+      color: #1E232C;
     }
 
-.tituloRodizio{font-size:20px;font-weight:700;margin-bottom:12px;}
-.pergunta{width:100%;p{margin-bottom:8px;font-weight:600;}}
-.botoes{display:flex;gap:12px;width:100%;}
-.botao{flex:1;min-height:48px;font-size:18px;font-weight:700;border:2px solid #239258;border-radius:10px;background:#fff;color:#239258;cursor:pointer;}
-.ativo{background:#239258;color:#fff;}
-.dePara{display:flex;gap:12px;width:100%;label{flex:1;display:flex;flex-direction:column;gap:4px;font-weight:600;}select{min-height:48px;font-size:16px;}}
+    input {
+      width: 100%;
+      height: 56px;
+      background: #F7F8F9;
+      border: 1px solid #E8ECF4;
+      border-radius: 8px;
+      padding: 0 18px;
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 500;
+      font-size: 15px;
+      color: #1E232C;
+      outline: none;
+      -moz-appearance: textfield;
+      transition: border-color 0.15s ease;
+
+      &:focus {
+        border-color: #34C759;
+        background: #FFFFFF;
+      }
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 8px;
+
+    button {
+      flex: 1;
+      min-height: 56px;
+      border-radius: 8px;
+      font-family: 'Urbanist', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: background-color 0.15s ease;
+
+      &:first-of-type {
+        background: #FFFFFF;
+        border: 1px solid #E8ECF4;
+        color: #1E232C;
+
+        &:hover {
+          background: #F7F8F9;
+        }
+      }
+
+      &:last-of-type {
+        background: #34C759;
+        border: none;
+        color: #FFFFFF;
+
+        &:hover {
+          background: #28B446;
+        }
+      }
+    }
+  }
+}
+
+.contentServices {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem .625rem;
+  border-radius: .625rem;
+  border: .1563rem solid #CCCCCC;
+  gap: .625rem;
+}
+
+.descriptionContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  border: .1563rem solid #CCCCCC;
+  padding: 1.25rem .625rem;
+  border-radius: .625rem;
+}
+
+.tituloRodizio {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.pergunta {
+  width: 100%;
+
+  p {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+}
+
+.botoes {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.botao {
+  flex: 1;
+  min-height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid #239258;
+  border-radius: 10px;
+  background: #FFFFFF;
+  color: #239258;
+  cursor: pointer;
+}
+
+.ativo {
+  background: #239258;
+  color: #FFFFFF;
+}
+
+.dePara {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+
+  label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: 600;
+  }
+}

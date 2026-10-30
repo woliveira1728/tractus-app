@@ -1,0 +1,108 @@
+.truckMap {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  max-height: 52vh;
+  display: block;
+  margin: 0 auto;
+}
+
+.body {
+  fill: #FFFFFF;
+  stroke: #A3A3A3;
+  stroke-width: 3;
+}
+
+.shaft {
+  stroke: #A3A3A3;
+  stroke-width: 3;
+}
+
+.axleFront {
+  stroke: #A3A3A3;
+  stroke-width: 3;
+}
+
+.axleRear {
+  stroke: #A3A3A3;
+  stroke-width: 8;
+}
+
+.hub {
+  fill: #FFFFFF;
+  stroke: #A3A3A3;
+  stroke-width: 2;
+}
+
+.hubRear {
+  fill: #A3A3A3;
+}
+
+.wheel {
+  rect {
+    fill: #FFFFFF;
+    stroke: #8C8C8C;
+    stroke-width: 3;
+    transition: stroke 0.15s ease, fill 0.15s ease;
+  }
+
+  line {
+    stroke: #8C8C8C;
+    stroke-width: 2;
+    transition: stroke 0.15s ease;
+  }
+}
+
+.hitArea {
+  fill: transparent;
+}
+
+.label {
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  fill: #1E232C;
+  text-decoration: underline;
+  transition: fill 0.15s ease;
+}
+
+.position {
+  cursor: pointer;
+  outline: none;
+
+  &:hover,
+  &:focus-visible {
+    .wheel rect {
+      fill: #EAF9EE;
+      stroke: #34C759;
+    }
+
+    .wheel line {
+      stroke: #34C759;
+    }
+
+    .label {
+      fill: #34C759;
+    }
+  }
+}
+
+.disabled {
+  cursor: default;
+  opacity: 0.4;
+
+  &:hover {
+    .wheel rect {
+      fill: #FFFFFF;
+      stroke: #8C8C8C;
+    }
+
+    .wheel line {
+      stroke: #8C8C8C;
+    }
+
+    .label {
+      fill: #1E232C;
+    }
+  }
+}

@@ -1,104 +1,197 @@
-
 .vehicleDashboardContainer {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem;
-    gap: 1.875rem;
-
-    h1 {
-        margin-bottom: 1.25rem;
-        font-size: 1.875rem;
-        font-weight: 700;
-    }
-
-    .eixosContainer {
-        width: 100%;
-        display: flex;
-        flex-direction: column-reverse;
-        align-items: center;
-        justify-content: center;
-
-        li {
-            width: 100%;;
-            list-style: none;
-            display: flex;
-            flex-direction: row;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 1rem;
-
-            .pLeft {
-                width: 20%;
-                font-size: 1.25rem;
-                font-weight: 700;
-                padding-bottom: 1.875rem;
-                text-align: right;
-                cursor: pointer;
-
-                span {
-                    color: #FFFFFF;
-                    background-color: #239258;
-                    padding: .5rem;
-                    border-radius: 50%;
-                }
-            }
-
-            img {
-                width: 200px;
-                height: auto;
-            }
-
-            .pRight {
-                width: 20%;
-                font-size: 1.25rem;
-                font-weight: 700;
-                padding-bottom: 1.875rem;
-                text-align: left;
-                cursor: pointer;
-
-                span {
-                    color: #FFFFFF;
-                    background-color: #239258;
-                    padding: .5rem;
-                    border-radius: 50%;
-
-                }
-            }
-        }
-    }
-
-    .button {
-        margin-top: 1.875rem;
-        width: 100%;
-        padding: 5px;
-        font-size: 20px;
-        font-weight: 700;
-        background-color: #239258;
-        color: #000000;
-        border: none;
-        border-radius: 1.5625rem;
-        cursor: pointer;
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-
-        &:hover {
-            background-color: #1e7e4c;
-        }
-    }
-
+  flex: 1;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: clamp(16px, 4vw, 28px) clamp(18px, 5vw, 28px) 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 }
 
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;z-index:2000;padding:20px;}
-.caixa{background:#fff;border-radius:12px;padding:24px;width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;gap:16px;text-align:center;h3{font-size:20px;font-weight:700;}p{font-size:15px;color:#555;}}
-.icone{font-size:48px;}
-.botoes{display:flex;gap:12px;width:100%;}
-.btnPrimario,.btnSecundario{flex:1;width:100%;min-height:48px;font-size:18px;font-weight:700;border-radius:10px;cursor:pointer;}
-.btnPrimario{background:#239258;color:#fff;border:none;}
-.btnSecundario{background:#fff;color:#239258;border:2px solid #239258;}
-.msgSalvo{width:100%;padding:12px 16px;background:#E6F4EC;color:#1B6E43;border:2px solid #239258;border-radius:10px;font-weight:600;text-align:center;}
-.alertaCritico{width:100%;padding:12px;background:#FDECEC;color:#B00020;border:2px solid #E53935;border-radius:10px;font-weight:700;text-align:left;}
-.alertaRecapagem{width:100%;padding:12px;background:#FFF4CC;color:#7A5C00;border:2px solid #F2C94C;border-radius:10px;font-weight:700;text-align:left;}
-.resumo{width:100%;list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;max-height:240px;overflow-y:auto;text-align:left;li{display:flex;flex-direction:column;gap:2px;padding:10px;border:2px solid #CCCCCC;border-radius:10px;font-size:14px;}.itemCritico{border-color:#E53935;background:#FDECEC;}.itemAlerta{border-color:#F2C94C;background:#FFF4CC;}}
+.title {
+  margin: 0;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 6.5vw, 30px);
+  line-height: 130%;
+  letter-spacing: -0.01em;
+  color: #1E232C;
+  text-align: center;
+}
+
+.emptyMessage {
+  margin: 0;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #8391A1;
+  text-align: center;
+}
+
+.actionsBlock {
+  margin-top: 8px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+}
+
+.buttonHistorical,
+.buttonReport {
+  flex: 1;
+  min-height: 56px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 130%;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  &:active {
+    transform: scale(0.99);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.buttonHistorical {
+  background: #34C759;
+
+  &:hover:not(:disabled) {
+    background: #28B446;
+  }
+}
+
+.buttonReport {
+  background: #1E232C;
+
+  &:hover:not(:disabled) {
+    background: #2c3340;
+  }
+}
+
+.msgSalvo {
+  width: 100%;
+  padding: 12px 16px;
+  background: #E6F4EC;
+  color: #1B6E43;
+  border: 2px solid #239258;
+  border-radius: 10px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.caixa {
+  background: #FFFFFF;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 15px;
+    color: #555555;
+  }
+}
+
+.botoes {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.btnPrimario,
+.btnSecundario {
+  flex: 1;
+  width: 100%;
+  min-height: 48px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.btnPrimario {
+  background: #239258;
+  color: #FFFFFF;
+  border: none;
+}
+
+.btnSecundario {
+  background: #FFFFFF;
+  color: #239258;
+  border: 2px solid #239258;
+}
+
+.alertaCritico {
+  width: 100%;
+  padding: 12px;
+  background: #FDECEC;
+  color: #B00020;
+  border: 2px solid #E53935;
+  border-radius: 10px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.alertaRecapagem {
+  width: 100%;
+  padding: 12px;
+  background: #FFF4CC;
+  color: #7A5C00;
+  border: 2px solid #F2C94C;
+  border-radius: 10px;
+  font-weight: 700;
+  text-align: left;
+}
+
+.resumo {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 240px;
+  overflow-y: auto;
+  text-align: left;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 10px;
+    border: 2px solid #CCCCCC;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .itemCritico {
+    border-color: #E53935;
+    background: #FDECEC;
+  }
+
+  .itemAlerta {
+    border-color: #F2C94C;
+    background: #FFF4CC;
+  }
+}

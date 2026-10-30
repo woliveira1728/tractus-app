@@ -1,10 +1,9 @@
 import React from 'react';
 import TemplatePage from '../template';
 import styles from './styles.module.scss';
-import eixoWithConnection from '../../assets/eixo-conexao.png';
-import eixoWithoutConnection from '../../assets/eixo-final.png';
 import { useUser } from '../../providers/userContextValues';
 import Modal from '../../components/Modal';
+import TruckMap from '../../components/truck-map';
 import { TyreDashboardContent } from '../../components/tyre-dashboard';
 import { HistoricalContent } from '../../components/historical';
 import type { Pneu } from '../../types';
@@ -16,7 +15,6 @@ const VehicleDashboard = () => {
   const [openHistoricalModal, setOpenHistoricalModal] = React.useState(false);
   const [etapa, setEtapa] = React.useState<'nada' | 'confirmar' | 'enviado' | 'offline'>('nada');
   const [antes, setAntes] = React.useState<Record<string, { pressao: number; sulco: number }>>({});
-
   const [editados, setEditados] = React.useState<string[]>([]);
   const [mensagem, setMensagem] = React.useState('');
 
@@ -39,91 +37,73 @@ const VehicleDashboard = () => {
     navigate('/identification');
   };
 
+  const tyres = pneusSelected ?? vehicleSelected?.pneus ?? [];
 
   const handleTyreSelect = (tyrePosition: string) => {
-    const tyre = pneusSelected?.find(p => p.posicao === tyrePosition) || null;
+    const tyre = tyres.find((p) => p.posicao === tyrePosition) || null;
     if (!tyre) {
       return;
     }
     setTyreSelected(tyre);
     setOpenTyreModal(true);
-  }
+  };
+
+  const handleCloseTyreModal = () => {
+    setOpenTyreModal(false);
+    setTyreSelected(null);
+  };
 
   return (
     <TemplatePage>
       <main className={styles.vehicleDashboardContainer}>
-        {mensagem && <div className={styles.msgSalvo}>{mensagem}</div>}
-        <h1>Identificação do veículo</h1>
-        {
-          !vehicleSelected ?
-            <p>Nenhum veículo selecionado.</p>
-          :    
-            <ul className={styles.eixosContainer}>
-              {
-                Array.from({ length: vehicleSelected.eixos }).map((_, idx) => {
-                  const number = idx + 1;
-                  const isLast = number === vehicleSelected.eixos;
-                  const img = isLast ? eixoWithoutConnection : eixoWithConnection;
+        <h1 className={styles.title}>Painel Visual do Veículo</h1>
+        {mensagem && <div className={styles.msgSalvo}>✅ {mensagem}</div>}
 
-                  return (
-                    <li key={`eixo-${number}`}>
-                      <p className={styles.pLeft} >
-                        <span onClick={() => handleTyreSelect(`L${number}`)}>{`L${number}`}</span>
-                      </p>
-                      <img src={img} alt={`Eixo ${number}`} />
-                      <p className={styles.pRight}>
-                        <span onClick={() => handleTyreSelect(`R${number}`)}>{`R${number}`}</span>
-                      </p>
-                    </li>
-                  );
-                })
-              }
-            </ul>
-        }
+        {!vehicleSelected ? (
+          <p className={styles.emptyMessage}>Nenhum veículo selecionado.</p>
+        ) : (
+          <TruckMap
+            eixos={vehicleSelected.eixos}
+            positions={tyres.map((p) => p.posicao)}
+            onSelect={handleTyreSelect}
+          />
+        )}
 
-        <div style={{ display: 'flex', gap: 8 }}>
-          <button className={styles.button} onClick={() => setOpenHistoricalModal(true)}>
-            Histórico
+        <div className={styles.actionsBlock}>
+          <button
+            type="button"
+            className={styles.buttonHistorical}
+            onClick={() => setOpenHistoricalModal(true)}
+            disabled={!vehicleSelected}
+          >
+            Histórico do Veículo
           </button>
 
-          <button className={styles.button} onClick={() => setEtapa('confirmar')}>
+          <button
+            type="button"
+            className={styles.buttonReport}
+            onClick={() => setEtapa('confirmar')}
+            disabled={!vehicleSelected}
+          >
             Enviar Relatório
           </button>
         </div>
 
         <Modal
           isOpen={openTyreModal}
-          onClose={() => {
-            setOpenTyreModal(false);
-            setTyreSelected(null);
-          }}
+          onClose={handleCloseTyreModal}
           title={tyreSelected?.posicao || ''}
         >
           <TyreDashboardContent
             tyre={tyreSelected}
             editado={!!tyreSelected && editados.includes(tyreSelected.posicao)}
             onSaved={handleSaved}
-            onClose={() => {
-              setOpenTyreModal(false);
-              setTyreSelected(null);
-            }}
+            onClose={handleCloseTyreModal}
           />
         </Modal>
 
-        <Modal
-          isOpen={openHistoricalModal}
-          onClose={() => setOpenHistoricalModal(false)}
-          title="Histórico"
-        >
-          {/* Pass list of tyres and initial index based on selected tyre (if any) */}
-          <HistoricalContent
-            tyres={pneusSelected ?? vehicleSelected?.pneus ?? []}
-            initialIndex={
-              tyreSelected && (pneusSelected ?? vehicleSelected?.pneus)
-                ? (pneusSelected ?? vehicleSelected?.pneus)!.findIndex((p) => p.posicao === tyreSelected.posicao)
-                : 0
-            }
-          />
+        <Modal isOpen={openHistoricalModal} onClose={() => setOpenHistoricalModal(false)}>
+          <HistoricalContent tyres={tyres} />
         </Modal>
 
         <Modal isOpen={etapa !== 'nada'} onClose={() => setEtapa('nada')} hideHeader>
@@ -174,7 +154,7 @@ const VehicleDashboard = () => {
         </Modal>
       </main>
     </TemplatePage>
-  )
-}
+  );
+};
 
 export default VehicleDashboard;

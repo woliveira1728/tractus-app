@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './styles.module.scss';
+import Dropdown from '../dropdown';
 import { useUser } from '../../providers/userContextValues';
 import type { Pneu } from '../../types';
 
@@ -11,6 +12,7 @@ type SimNaoProps = {
   onChange: (v: Resposta) => void;
 };
 
+// Pergunta com botões grandes de Sim e Não
 const SimNao = ({ pergunta, valor, onChange }: SimNaoProps) => (
   <div className={styles.pergunta}>
     <p>{pergunta}</p>
@@ -24,6 +26,7 @@ const SimNao = ({ pergunta, valor, onChange }: SimNaoProps) => (
 const Caster = ({ tyre, onSubstitutionChange }: { tyre: Pneu; onSubstitutionChange?: (v: boolean) => void }) => {
   const { vehicleSelected } = useUser();
   const tyresPositions = vehicleSelected ? vehicleSelected.pneus.map(p => p.posicao) : [];
+  const opcoes = tyresPositions.map(p => ({ value: p, label: p }));
 
   const [alteracao, setAlteracao] = React.useState<Resposta>(null);
   const [recapagem, setRecapagem] = React.useState<Resposta>(null);
@@ -45,19 +48,16 @@ const Caster = ({ tyre, onSubstitutionChange }: { tyre: Pneu; onSubstitutionChan
       <div className={styles.descriptionContainer}>
         <SimNao pergunta="Alteração da posição?" valor={alteracao} onChange={setAlteracao} />
 
+        {/* Seletores De / Para */}
         {alteracao === 'sim' && (
           <div className={styles.dePara}>
             <label>
               De
-              <select className={styles.select} value={de} onChange={e => setDe(e.target.value)}>
-                {tyresPositions.map(p => <option key={p} value={p}>{p}</option>)}
-              </select>
+              <Dropdown size="small" ariaLabel="Posição de origem" value={de} onChange={setDe} options={opcoes} />
             </label>
             <label>
               Para
-              <select className={styles.select} value={para} onChange={e => setPara(e.target.value)}>
-                {tyresPositions.map(p => <option key={p} value={p}>{p}</option>)}
-              </select>
+              <Dropdown size="small" ariaLabel="Nova posição" value={para} onChange={setPara} options={opcoes} />
             </label>
           </div>
         )}
