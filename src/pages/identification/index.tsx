@@ -34,14 +34,20 @@ const Identification = () => {
         <h1 className={styles.title}>Identificação do veículo</h1>
 
         <form className={styles.formContainer} onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Digite a placa"
-            name="plate"
-            value={plate}
-            maxLength={8}
-            onChange={(e) => setPlate(e.target.value.toUpperCase())}
-          />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="vehicle-plate" className={styles.inputLabel}>
+              Placa do veículo
+            </label>
+            <input
+              id="vehicle-plate"
+              type="text"
+              placeholder="Digite a placa (ex.: ABC-1234)"
+              name="plate"
+              value={plate}
+              maxLength={8}
+              onChange={(e) => setPlate(e.target.value.toUpperCase())}
+            />
+          </div>
 
           <button type="submit" className={styles.buttonNext}>
             Avançar

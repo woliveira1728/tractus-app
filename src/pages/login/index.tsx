@@ -28,34 +28,46 @@ const LoginPage = () => {
         <h1 className={styles.welcomeTitle}>Bem-vindo de volta!</h1>
 
         <form className={styles.formContainer} onSubmit={handleSubmit}>
-          <div className={styles.inputWrapper}>
-            <input
-              type="email"
-              placeholder="Insira seu e-mail"
-              name="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="login-email" className={styles.inputLabel}>
+              E-mail
+            </label>
+            <div className={styles.inputWrapper}>
+              <input
+                id="login-email"
+                type="email"
+                placeholder="Insira seu e-mail"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+            </div>
           </div>
 
-          <div className={styles.inputWrapper}>
-            <input
-              type={showPassword ? 'text' : 'password'}
-              placeholder="Insira sua senha"
-              name="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-            <button
-              type="button"
-              className={styles.eyeButton}
-              onClick={() => setShowPassword((prev) => !prev)}
-              aria-label="Mostrar ou ocultar senha"
-            >
-              {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
-            </button>
+          <div className={styles.fieldGroup}>
+            <label htmlFor="login-password" className={styles.inputLabel}>
+              Senha
+            </label>
+            <div className={styles.inputWrapper}>
+              <input
+                id="login-password"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Insira sua senha"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+              <button
+                type="button"
+                className={styles.eyeButton}
+                onClick={() => setShowPassword((prev) => !prev)}
+                aria-label="Mostrar ou ocultar senha"
+              >
+                {showPassword ? <FaEyeSlash size={18} /> : <FaEye size={18} />}
+              </button>
+            </div>
           </div>
 
           <div className={styles.forgotRow}>

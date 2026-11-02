@@ -43,6 +43,22 @@
   width: 100%;
 }
 
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.inputLabel {
+  font-family: 'Urbanist', sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 125%;
+  color: #1E232C;
+}
+
 .input {
   width: 100%;
   height: 56px;

@@ -30,57 +30,84 @@ const RegisterPage = () => {
         <h1 className={styles.title}>Olá! Cadastre-se para começar.</h1>
 
         <form className={styles.formContainer} onSubmit={handleSubmit}>
-          <input
-            className={styles.input}
-            type="text"
-            placeholder="Nome de usuário"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-          />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="register-name" className={styles.inputLabel}>
+              Nome de usuário
+            </label>
+            <input
+              id="register-name"
+              className={styles.input}
+              type="text"
+              placeholder="Insira seu nome de usuário"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            className={styles.input}
-            type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="register-email" className={styles.inputLabel}>
+              E-mail
+            </label>
+            <input
+              id="register-email"
+              className={styles.input}
+              type="email"
+              placeholder="Insira seu e-mail"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            className={styles.input}
-            type="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="register-password" className={styles.inputLabel}>
+              Senha
+            </label>
+            <input
+              id="register-password"
+              className={styles.input}
+              type="password"
+              placeholder="Insira sua senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+          </div>
 
-          <input
-            className={styles.input}
-            type="password"
-            placeholder="Confirme sua senha"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            required
-          />
+          <div className={styles.fieldGroup}>
+            <label htmlFor="register-confirm-password" className={styles.inputLabel}>
+              Confirme sua senha
+            </label>
+            <input
+              id="register-confirm-password"
+              className={styles.input}
+              type="password"
+              placeholder="Repita sua senha"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+            />
+          </div>
 
-          <div className={styles.roleSelector}>
-            <button
-              type="button"
-              className={`${styles.rolePill} ${role === 'borracheiro' ? styles.activeRole : ''}`}
-              onClick={() => setRole('borracheiro')}
-            >
-              Perfil: Borracheiro
-            </button>
-            <button
-              type="button"
-              className={`${styles.rolePill} ${role === 'gerente' ? styles.activeRole : ''}`}
-              onClick={() => setRole('gerente')}
-            >
-              Perfil: Gerente
-            </button>
+          <div className={styles.fieldGroup}>
+            <span className={styles.inputLabel}>Perfil de acesso</span>
+            <div className={styles.roleSelector}>
+              <button
+                type="button"
+                className={`${styles.rolePill} ${role === 'borracheiro' ? styles.activeRole : ''}`}
+                onClick={() => setRole('borracheiro')}
+              >
+                Perfil: Borracheiro
+              </button>
+              <button
+                type="button"
+                className={`${styles.rolePill} ${role === 'gerente' ? styles.activeRole : ''}`}
+                onClick={() => setRole('gerente')}
+              >
+                Perfil: Gerente
+              </button>
+            </div>
           </div>
 
           <button type="submit" className={styles.registerBtn}>

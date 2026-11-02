@@ -88,14 +88,20 @@ const ForgotPassword = () => {
             </div>
 
             <form className={styles.formContainer} onSubmit={handleSendCode}>
-              <input
-                className={styles.input}
-                type="email"
-                placeholder="Insira seu e-mail"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
+              <div className={styles.fieldGroup}>
+                <label htmlFor="forgot-email" className={styles.inputLabel}>
+                  E-mail
+                </label>
+                <input
+                  id="forgot-email"
+                  className={styles.input}
+                  type="email"
+                  placeholder="Insira seu e-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+              </div>
 
               <button className={styles.primaryBtn} type="submit">
                 Enviar código
@@ -126,21 +132,27 @@ const ForgotPassword = () => {
             </div>
 
             <form className={styles.formContainer} onSubmit={handleVerifyOtp}>
-              <div className={styles.otpRow}>
-                {otpDigits.map((digit, idx) => (
-                  <input
-                    key={idx}
-                    ref={otpRefs[idx]}
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={digit}
-                    onChange={(e) => handleOtpChange(idx, e.target.value)}
-                    onKeyDown={(e) => handleOtpKeyDown(idx, e)}
-                    className={`${styles.otpBox} ${digit ? styles.otpFilled : ''}`}
-                    aria-label={`Dígito ${idx + 1} do código OTP`}
-                  />
-                ))}
+              <div className={styles.fieldGroup}>
+                <label htmlFor="otp-digit-0" className={styles.inputLabel}>
+                  Código de verificação
+                </label>
+                <div className={styles.otpRow}>
+                  {otpDigits.map((digit, idx) => (
+                    <input
+                      key={idx}
+                      id={`otp-digit-${idx}`}
+                      ref={otpRefs[idx]}
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={1}
+                      value={digit}
+                      onChange={(e) => handleOtpChange(idx, e.target.value)}
+                      onKeyDown={(e) => handleOtpKeyDown(idx, e)}
+                      className={`${styles.otpBox} ${digit ? styles.otpFilled : ''}`}
+                      aria-label={`Dígito ${idx + 1} do código OTP`}
+                    />
+                  ))}
+                </div>
               </div>
 
               <button className={styles.primaryBtn} type="submit">
@@ -174,23 +186,35 @@ const ForgotPassword = () => {
             </div>
 
             <form className={styles.formContainer} onSubmit={handleResetPassword}>
-              <input
-                className={styles.input}
-                type="password"
-                placeholder="Nova Senha"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                required
-              />
+              <div className={styles.fieldGroup}>
+                <label htmlFor="new-password" className={styles.inputLabel}>
+                  Nova senha
+                </label>
+                <input
+                  id="new-password"
+                  className={styles.input}
+                  type="password"
+                  placeholder="Insira sua nova senha"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                />
+              </div>
 
-              <input
-                className={styles.input}
-                type="password"
-                placeholder="Confirme sua senha"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                required
-              />
+              <div className={styles.fieldGroup}>
+                <label htmlFor="confirm-new-password" className={styles.inputLabel}>
+                  Confirme sua senha
+                </label>
+                <input
+                  id="confirm-new-password"
+                  className={styles.input}
+                  type="password"
+                  placeholder="Repita sua nova senha"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                />
+              </div>
 
               <button className={styles.primaryBtn} type="submit">
                 Redefinir senha
