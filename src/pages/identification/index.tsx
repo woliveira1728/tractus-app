@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import TemplatePage from '../template';
 import styles from './styles.module.scss';
 import { FaQrcode } from 'react-icons/fa';
-import { toast } from 'react-toastify';
 import { useUser } from '../../providers/userContextValues';
 import type { Veiculo } from '../../types';
 
 const Identification = () => {
-  const { vehicles, getVehiclesByPlate, navigate, setVehicleSelected, setPneusSelected } = useUser();
+  const { vehicles, getVehiclesByPlate, navigate, setVehicleSelected, setPneusSelected, notificar } = useUser();
   const [plate, setPlate] = useState('');
 
   const openVehicle = (vehicle: Veiculo) => {
@@ -20,7 +19,7 @@ const Identification = () => {
     e.preventDefault();
 
     if (!plate.trim()) {
-      toast.warn('Digite a placa do veículo.');
+      notificar('Digite a placa do veículo!', 'erro');
       return;
     }
 

@@ -63,18 +63,18 @@
 }
 
 .buttonHistorical {
-  background: #34C759;
-
-  &:hover:not(:disabled) {
-    background: #28B446;
-  }
-}
-
-.buttonReport {
   background: #1E232C;
 
   &:hover:not(:disabled) {
     background: #2c3340;
+  }
+}
+
+.buttonReport {
+  background: #34C759;
+
+  &:hover:not(:disabled) {
+    background: #28B446;
   }
 }
 

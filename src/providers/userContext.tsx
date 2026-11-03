@@ -32,6 +32,7 @@ import {
   resetIDBToDefaults,
 } from '../services/offlineStorage';
 import { evaluateSulco } from '../utils/sulco';
+import { Notificacao } from '../pages/login';
 
 function formatBrDateTime(date: Date): string {
   const pad = (n: number) => String(n).padStart(2, '0');
@@ -137,6 +138,18 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setSimulatedOffline((prev) => !prev);
   };
 
+  // Notificação padrão do sistema
+  const notificar = (mensagem: string, tipo: 'sucesso' | 'erro' = 'sucesso') => {
+    toast(<Notificacao mensagem={mensagem} tipo={tipo} />, {
+      position: 'top-center',
+      autoClose: 3000,
+      hideProgressBar: true,
+      closeButton: false,
+      icon: false,
+      className: 'toastNotificacao',
+    });
+  };
+
   // RF01 - Autenticação por Perfis com Redirecionamento Dinâmico
   const login = (userData: Login) => {
     const cleanEmail = userData.email.trim().toLowerCase();
@@ -146,7 +159,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
     if (foundUser) {
       setUser(foundUser);
-      toast.success(`Bem-vindo, ${foundUser.name}!`);
+      notificar(`Olá, ${foundUser.name}! Bom trabalho hoje.`);
       if (foundUser.role === 'gerente') {
         navigate('/manager/services');
       } else {
@@ -155,7 +168,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       return;
     }
 
-    toast.error('Usuário ou senha inválidos.');
+    notificar('Usuário ou senha inválidos.', 'erro');
   };
 
   const logout = () => {
@@ -166,12 +179,12 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const registerUser = (data: RegisterPayload): boolean => {
     const cleanEmail = data.email.trim().toLowerCase();
     if (!cleanEmail || !data.password || !data.name.trim()) {
-      toast.error('Preencha todos os campos obrigatórios.');
+      notificar('Preencha todos os campos obrigatórios.', 'erro');
       return false;
     }
     const exists = users.some((u) => u.email.toLowerCase() === cleanEmail);
     if (exists) {
-      toast.error('Já existe uma conta cadastrada com este e-mail.');
+      notificar('Já existe uma conta cadastrada com este e-mail.', 'erro');
       return false;
     }
 
@@ -193,7 +206,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setUsers(nextUsers);
     void saveUsersToIDB(nextUsers);
     setUser(newUser);
-    toast.success('Conta criada com sucesso!');
+    notificar('Conta criada com sucesso!', 'sucesso');
 
     if (newUser.role === 'gerente') {
       navigate('/manager/services');
@@ -207,29 +220,29 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   const requestPasswordOtp = (email: string): string | null => {
     const cleanEmail = email.trim().toLowerCase();
     if (!cleanEmail) {
-      toast.error('Insira o endereço de e-mail vinculado à sua conta.');
+      notificar('Insira o endereço de e-mail vinculado à sua conta.', 'erro');
       return null;
     }
     setRecoveryEmail(cleanEmail);
     const code = '5138'; // Prefixo 5-1-3 visível na Imagem 4.3 do protótipo
     setActiveOtpCode(code);
-    toast.info(`Código verificador enviado para ${cleanEmail}: ${code}`);
+    notificar(`Código verificador enviado para ${cleanEmail}: ${code}`, 'erro');
     return code;
   };
 
   const verifyPasswordOtp = (code: string): boolean => {
     const clean = code.replace(/\s+/g, '');
     if (clean.length < 4) {
-      toast.error('Digite todos os dígitos do código de verificação.');
+      notificar('Digite todos os dígitos do código de verificação.', 'erro');
       return false;
     }
-    toast.success('Código verificado com sucesso!');
+    notificar('Código verificado com sucesso!', 'sucesso');
     return true;
   };
 
   const resetPassword = (newPassword: string): boolean => {
     if (!newPassword || newPassword.length < 3) {
-      toast.error('A nova senha deve ter pelo menos 3 caracteres.');
+      notificar('A nova senha deve ter pelo menos 3 caracteres.', 'erro');
       return false;
     }
     if (recoveryEmail) {
@@ -241,7 +254,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       setUsers(nextUsers);
       void saveUsersToIDB(nextUsers);
     }
-    toast.success('Senha redefinida com sucesso! Faça login com sua nova senha.');
+    notificar('Senha redefinida com sucesso! Faça login com sua nova senha.', 'sucesso');
     navigate('/login');
     return true;
   };
@@ -253,7 +266,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       (v) => v.placa.replace(/[^A-Z0-9]/gi, '').toUpperCase() === normalized
     );
     if (!foundVehicle) {
-      toast.error('Veículo não encontrado para a placa informada.');
+      notificar('Veículo não encontrado para essa placa.', 'erro');
       return null;
     }
     return foundVehicle;
@@ -335,7 +348,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   ): boolean => {
     const found = findTyreById(pneuId);
     if (!found) {
-      toast.error('Pneu não encontrado.');
+      notificar('Pneu não encontrado.', 'erro');
       return false;
     }
 
@@ -454,7 +467,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
   ): boolean => {
     const found = findTyreById(originalPneuId);
     if (!found) {
-      toast.error('Pneu original não encontrado para substituição.');
+      notificar('Pneu original não encontrado para substituição.', 'erro');
       return false;
     }
 
@@ -577,6 +590,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       value={{
         user,
         setUser,
+        notificar,
         login,
         logout,
         registerUser,

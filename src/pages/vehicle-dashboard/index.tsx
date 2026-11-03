@@ -9,22 +9,20 @@ import { HistoricalContent } from '../../components/historical';
 import type { Pneu } from '../../types';
 
 const VehicleDashboard = () => {
-  const { vehicleSelected, pneusSelected, navigate, isOnline } = useUser();
+  const { vehicleSelected, pneusSelected, navigate, isOnline, notificar } = useUser();
   const [openTyreModal, setOpenTyreModal] = React.useState(false);
   const [tyreSelected, setTyreSelected] = React.useState<Pneu | null>(null);
   const [openHistoricalModal, setOpenHistoricalModal] = React.useState(false);
   const [etapa, setEtapa] = React.useState<'nada' | 'confirmar' | 'enviado' | 'offline'>('nada');
   const [antes, setAntes] = React.useState<Record<string, { pressao: number; sulco: number }>>({});
   const [editados, setEditados] = React.useState<string[]>([]);
-  const [mensagem, setMensagem] = React.useState('');
 
   const handleSaved = (posicao: string) => {
     setEditados(prev => (prev.includes(posicao) ? prev : [...prev, posicao]));
     if (tyreSelected) {
       setAntes(prev => (prev[posicao] ? prev : { ...prev, [posicao]: { pressao: tyreSelected.pressao, sulco: tyreSelected.sulco } }));
     }
-    setMensagem(`Alterações do pneu ${posicao} salvas!`);
-    setTimeout(() => setMensagem(''), 3000);
+    notificar(`Alterações do pneu ${posicao} salvas!`);
   };
 
   const alterados = (pneusSelected ?? []).filter(p => editados.includes(p.posicao));
@@ -56,7 +54,6 @@ const VehicleDashboard = () => {
   return (
     <TemplatePage>
       <main className={styles.vehicleDashboardContainer}>
-        {mensagem && <div className={styles.msgSalvo}>{mensagem}</div>}
         <h1 className={styles.title}>Painel Visual do Veículo</h1>
 
         {!vehicleSelected ? (

@@ -28,11 +28,11 @@ const Caster = ({ tyre, onSubstitutionChange }: { tyre: Pneu; onSubstitutionChan
   const tyresPositions = vehicleSelected ? vehicleSelected.pneus.map(p => p.posicao) : [];
   const opcoes = tyresPositions.map(p => ({ value: p, label: p }));
 
-  const [alteracao, setAlteracao] = React.useState<Resposta>(null);
-  const [recapagem, setRecapagem] = React.useState<Resposta>(null);
-  const [substituicao, setSubstituicao] = React.useState<Resposta>('nao');
-  const [vendido, setVendido] = React.useState<Resposta>(null);
-  const [sucateado, setSucateado] = React.useState<Resposta>(null);
+  const [alteracao, setAlteracao] = React.useState<Resposta>('nao');
+  const [recapagem, setRecapagem] = React.useState<Resposta>('nao');
+  const [substituicao, setSubstituicao] = React.useState<Resposta>('sim');
+  const [vendido, setVendido] = React.useState<Resposta>('nao');
+  const [sucateado, setSucateado] = React.useState<Resposta>('nao');
   const [de, setDe] = React.useState(tyre.posicao);
   const [para, setPara] = React.useState(tyre.posicao);
 

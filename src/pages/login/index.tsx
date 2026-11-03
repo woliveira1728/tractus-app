@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TemplatePage from '../template';
 import styles from './styles.module.scss';
-import { FaFacebookF, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaFacebookF, FaApple, FaEye, FaEyeSlash, FaCheck } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { useUser } from '../../providers/userContextValues';
 
@@ -141,5 +141,22 @@ const LoginPage = () => {
     </TemplatePage>
   );
 };
+// Notificação padrão
+type NotificacaoProps = { mensagem: string; tipo?: 'sucesso' | 'erro' };
+
+export const Notificacao = ({ mensagem, tipo = 'sucesso' }: NotificacaoProps) => (
+  <div className={styles.notificacao}>
+    <div className={styles.notificacaoIcone}>
+      {tipo === 'erro' ? '⚠️' : <FaCheck color="#34C759" size={20} />}
+    </div>
+    <div className={styles.notificacaoTexto}>
+      <div className={styles.notificacaoTopo}>
+        <strong>Tractus</strong>
+        <span>agora</span>
+      </div>
+      <p>{mensagem}</p>
+    </div>
+  </div>
+);
 
 export default LoginPage;
