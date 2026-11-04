@@ -80,3 +80,87 @@
     }
   }
 }
+
+.contentServices {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem .625rem;
+  border-radius: .625rem;
+  border: .1563rem solid #CCCCCC;
+  gap: .625rem;
+}
+
+.descriptionContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  border: .1563rem solid #CCCCCC;
+  padding: 1.25rem .625rem;
+  border-radius: .625rem;
+}
+
+.tituloRodizio {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.pergunta {
+  width: 100%;
+
+  p {
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+}
+
+.botoes {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.botao {
+  flex: 1;
+  min-height: 48px;
+  font-family: 'Urbanist', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  border: 2px solid #34C759;
+  border-radius: 8px;
+  background: #FFFFFF;
+  color: #34C759;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background: #F7F8F9;
+  }
+}
+
+.ativo {
+  background: #34C759;
+  color: #FFFFFF;
+
+  &:hover {
+    background: #28B446;
+  }
+}
+
+.dePara {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+
+  label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    font-weight: 600;
+  }
+}

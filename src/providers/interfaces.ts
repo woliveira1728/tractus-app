@@ -35,6 +35,7 @@ export interface CreateServiceOrderInput {
 export interface UserContextType {
   user: User | null;
   setUser: (user: User | null) => void;
+  notificar: (mensagem: string, tipo?: 'sucesso' | 'erro') => void;
   login: (userData: Login) => void;
   logout: () => void;
   registerUser: (data: RegisterPayload) => boolean;

@@ -4,14 +4,13 @@ import TemplatePage from '../template';
 import styles from './styles.module.scss';
 import { FaQrcode } from 'react-icons/fa';
 import { BsQrCode } from 'react-icons/bs';
-import { toast } from 'react-toastify';
 import { useUser } from '../../providers/userContextValues';
 import type { Veiculo } from '../../types';
 
 type CameraStatus = 'loading' | 'active' | 'error';
 
 const IdentificationByQrCode = () => {
-  const { getVehiclesByPlate, navigate, setVehicleSelected, setPneusSelected } = useUser();
+  const { getVehiclesByPlate, navigate, setVehicleSelected, setPneusSelected, notificar } = useUser();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const lastReadRef = useRef({ text: '', time: 0 });
@@ -22,7 +21,7 @@ const IdentificationByQrCode = () => {
   const openVehicle = (vehicle: Veiculo) => {
     setVehicleSelected(vehicle);
     setPneusSelected(vehicle.pneus);
-    toast.success(`QR Code lido: veículo ${vehicle.placa}`);
+    notificar(`QR Code lido: veículo ${vehicle.placa}`, 'sucesso')
     navigate('/vehicle-dashboard');
   };
 
