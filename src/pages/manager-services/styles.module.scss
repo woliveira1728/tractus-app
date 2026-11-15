@@ -1,0 +1,249 @@
+.container {
+  padding: 0 20px 28px;
+  color: #1e232c;
+}
+
+.title {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  background: #f7f8fa;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+
+  input {
+    width: 100%;
+    min-width: 0;
+    border: 0;
+    outline: none;
+    background: transparent;
+    color: #1e232c;
+    font: inherit;
+    font-size: 14px;
+
+    &::placeholder {
+      color: #8391a1;
+    }
+  }
+
+  &:focus-within {
+    border-color: #2ac653;
+  }
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 6px;
+  margin: 10px 0 24px;
+
+  button {
+    flex: 1;
+    min-width: 0;
+    padding: 11px 4px;
+    border: 0;
+    border-radius: 4px;
+    background: #1e232c;
+    color: #fff;
+    font: inherit;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .activeFilter {
+    background: #2ac653;
+  }
+
+  button:focus-visible {
+    outline: 2px solid #1e232c;
+    outline-offset: 3px;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.card {
+  padding: 16px;
+  background: #f7f8fa;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 16px;
+
+  h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+  }
+}
+
+.badge {
+  flex-shrink: 0;
+  min-width: 108px;
+  padding: 5px 8px;
+  border-radius: 2px;
+  color: #fff;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.pendente {
+  background: #ffb000;
+  color: #1e232c;
+}
+
+.aprovado {
+  background: #2ac653;
+}
+
+.reprovado {
+  background: #e5252a;
+}
+
+.description {
+  font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+
+  p {
+    margin: 4px 0;
+  }
+}
+
+.empty {
+  padding: 24px 12px;
+  color: #64748b;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* Campo de pesquisa e botão lateral */
+
+.searchRow {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.searchRow .searchBox {
+  flex: 1;
+  min-width: 0;
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 48px;
+  min-height: 48px;
+  border: 1px solid #e8ecf4;
+  border-radius: 8px;
+  background: #f7f8fa;
+  color: #1e232c;
+  cursor: pointer;
+
+  &:hover {
+    background: #e8ecf4;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #2ac653;
+    outline-offset: 2px;
+  }
+}
+
+/* Exibição dos filtros */
+
+.filters[hidden] {
+  display: none;
+}
+
+/* Ícone ilustrativo dos pneus */
+
+.cardBody {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.tireIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 95px;
+  height: 95px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+
+  img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+}
+
+.cardBody .description {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 380px) {
+  .cardBody {
+    gap: 10px;
+  }
+
+  .tireIcon {
+    width: 50px;
+    height: 50px;
+  }
+
+  .tireIcon svg {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+.cardLink {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+
+  &:hover {
+    border-color: #2ac653;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #2ac653;
+    outline-offset: 3px;
+  }
+}

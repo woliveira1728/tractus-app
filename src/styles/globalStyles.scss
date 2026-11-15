@@ -1,25 +1,74 @@
 @import url("./reset.scss");
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Lexend+Zetta:wght@700&family=Urbanist:wght@300;400;500;600;700;800&display=swap');
 
 :root {
-  // --primary-dark: #239258; /* Cor primária da Nex Tecnologia */
-  --primary-action: #0d9488;
-  --primary-action-hover: #057a68;
-  --background-light: #f7f7f7;
-  --card-background: #ffffff;
-  --text-dark: #1f2937;
-  --text-light: #6b7280;
-  --border-color: #d1d5db;
-  --alert-bg: #fee2e2;
-  --alert-text: #991b1b;
-  --alert-border: #f87171;
-  --ok-bg: #d1fae5;
-  --ok-text: #065f46;
-  --ok-border: #34d399;
+  /* Figma Design Tokens - TractusApp */
+  --font-primary: 'Urbanist', 'Inter', sans-serif;
+  --font-brand: 'Lexend Zetta', sans-serif;
+  --font-axle: 'Inter', sans-serif;
 
-  color-scheme: light dark;
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #242424;
+  /* Core Palette */
+  --color-white: #FFFFFF;
+  --color-dark: #1E232C;
+  --color-dark-alt: #1E1E1E;
+  --color-green: #34C759;
+  --color-green-hover: #28B446;
+  --color-cyan-otp: #35C2C1;
+  --color-blue-qr: #2879F1;
+
+  /* Neutrals & Surfaces */
+  --color-input-bg: #F7F8F9;
+  --color-qr-bg: #F2F1F1;
+  --color-border: #E8ECF4;
+  --color-gray-text: #8391A1;
+  --color-gray-sub: #838BA1;
+  --color-dark-gray: #6A707C;
+  --color-backdrop-gray: #DBDBDB;
+
+  /* Service Order Status Badges */
+  --status-pending: #FFB30E;
+  --status-approved: #34C759;
+  --status-rejected: #D82D30;
+
+  /* Prescriptive Alerts (RN01 & RNF02 WCAG 2.1 AA) */
+  --alert-critical-bg: #FEE2E2;
+  --alert-critical-text: #991B1B;
+  --alert-critical-border: #D82D30;
+
+  --alert-warning-bg: #FEF3C7;
+  --alert-warning-text: #92400E;
+  --alert-warning-border: #FFB30E;
+
+  --alert-safe-bg: #DCFCE7;
+  --alert-safe-text: #166534;
+  --alert-safe-border: #34C759;
+
+  /* Legacy aliases for existing components */
+  --primary-dark: #34C759;
+  --primary-action: #34C759;
+  --primary-action-hover: #28B446;
+  --background-light: #F7F8F9;
+  --card-background: #FFFFFF;
+  --text-dark: #1E232C;
+  --text-light: #6A707C;
+  --border-color: #E8ECF4;
+  --alert-bg: #FEE2E2;
+  --alert-text: #991B1B;
+  --alert-border: #D82D30;
+  --ok-bg: #DCFCE7;
+  --ok-text: #166534;
+  --ok-border: #34C759;
+
+  /* Touch & Sizing (RNF01 >= 48dp) */
+  --touch-min-height: 48px;
+  --input-height: 56px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+
+  color-scheme: light;
+  color: var(--color-dark);
+  background-color: #FFFFFF;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,12 +76,37 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html,
 body {
-  font-family: 'Inter', sans-serif;
+  font-family: var(--font-primary);
   margin: 0;
-  background-color: #000000;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
   padding: 0;
+  width: 100%;
+  min-height: 100dvh;
+  background-color: #FFFFFF;
+  color: var(--color-dark);
+  overflow-x: hidden;
+
+  @media (min-width: 768px) {
+    background-color: #F2F4F8;
+  }
+}
+
+#root {
+  width: 100%;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-primary);
 }

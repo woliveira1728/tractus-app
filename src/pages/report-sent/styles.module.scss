@@ -1,0 +1,58 @@
+.reportSentContainer {
+  flex: 1;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: clamp(40px, 12vh, 120px) clamp(18px, 5vw, 28px) 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon {
+  color: #34C759;
+  margin-bottom: 32px;
+}
+
+.title {
+  margin: 0 0 12px 0;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 700;
+  font-size: clamp(24px, 6.5vw, 30px);
+  line-height: 130%;
+  letter-spacing: -0.01em;
+  color: #1E232C;
+  text-align: center;
+}
+
+.subtitle {
+  margin: 0 0 40px 0;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 150%;
+  color: #838BA1;
+  text-align: center;
+}
+
+.buttonBack {
+  width: 100%;
+  min-height: 56px;
+  background: #1E232C;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Urbanist', sans-serif;
+  font-weight: 600;
+  font-size: 15px;
+  color: #FFFFFF;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  &:hover {
+    background: #2c3340;
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
+}

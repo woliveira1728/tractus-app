@@ -28,8 +28,13 @@ const IdentificationByPlate = () => {
     <TemplatePage>
       <main className={styles.identificationContainer}>
         <h1>Identificação do veículo</h1>
-        <p>Digite a placa do veículo</p>
-        <input type="text" placeholder="ABC-1234 / BRA2E19" onChange={handlePlateInputChange}/>
+        <label htmlFor="plate-input">Placa do veículo</label>
+        <input
+          id="plate-input"
+          type="text"
+          placeholder="ABC-1234 / BRA2E19"
+          onChange={handlePlateInputChange}
+        />
       </main>
     </TemplatePage>
   )

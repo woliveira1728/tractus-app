@@ -4,16 +4,29 @@ import type { ReactNode } from 'react';
 
 type TemplatePageProps = {
   children?: ReactNode;
+  showBack?: boolean;
+  onBack?: () => void;
+  hideNavRow?: boolean;
+  grayBackground?: boolean;
 };
 
-function TemplatePage({ children }: TemplatePageProps) {
-
+function TemplatePage({
+  children,
+  showBack = true,
+  onBack,
+  hideNavRow = false,
+  grayBackground = false,
+}: TemplatePageProps) {
   return (
-    <main className={styles.templateContainer}>
-        <Header />
-        {children}
-    </main>
-  )
+    <div
+      className={`${styles.templateContainer} ${
+        grayBackground ? styles.grayBg : ''
+      }`}
+    >
+      <Header showBack={showBack} onBack={onBack} hideNavRow={hideNavRow} />
+      <div className={styles.contentArea}>{children}</div>
+    </div>
+  );
 }
 
 export default TemplatePage;

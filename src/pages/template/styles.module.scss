@@ -1,12 +1,32 @@
 .templateContainer {
-  width: 450px;
-  max-width: 450px;
-  height: 800px;
-  background-color: var(--card-background);
-  box-shadow: 0 0 1.25rem rgba(0, 0, 0, 0.1);
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
-  padding-top: 4.375rem;
-  margin-top: 2.5rem;
-  border-radius: .75rem;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    max-width: 540px;
+    min-height: calc(100dvh - 3rem);
+    margin: 1.5rem auto;
+    border-radius: 20px;
+    box-shadow: 0 12px 36px rgba(30, 35, 44, 0.08);
+    border: 1px solid #E8ECF4;
+  }
+}
+
+.grayBg {
+  background-color: #DBDBDB;
+}
+
+.contentArea {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 540px;
+  margin: 0 auto;
+  position: relative;
 }
